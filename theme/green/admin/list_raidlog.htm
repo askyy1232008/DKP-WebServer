@@ -1,0 +1,220 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.action|}{|$lang.list|}</title>
+</head>
+
+<body>
+
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<div id="dhtmltooltip"></div>
+<script src="./script/tooltips.js" language="javascript"></script>
+
+<table width="100%" border="0">
+	<tr>
+		<td colspan="20" class="sectiontitle">{|$lang.action|}{|$lang.list|}</td>
+	</tr>
+
+  <tr class="contenttitle">
+  	<td>{|$lang.num|}</td>
+  	<td>{|$lang.name|}</td>
+  	<td>{|$lang.configure|}</td>
+	<td>{|$lang.invitetime|}</td>
+	<td>{|$lang.starttime|}</td>
+	<td>{|$lang.circaendtime|}</td>
+	<td>{|$lang.stat|}</td>
+	<td>{|$lang.opertion|}</td>
+  </tr>
+
+  {|foreach item=val from=$userdata|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+			<td>{|$val.id|}</td>
+			<td><a href='index.php?module=admin&act=list&obj=showsignup&id={|$val.id|}' onMouseover="ddrivetip('{|$val.signupnotes|}')"; onMouseout="hideddrivetip()">{|$val.name|}</a></td>
+			<td><a href='index.php?module=admin&act=modify&obj=raidcfg&id={|$val.rid|}' onMouseover="ddrivetip('{|$val.cfgnotes|}')"; onMouseout="hideddrivetip()">{|$val.cfg|}</a></td>
+			<td>{|$val.invitetime|}</td>
+			<td>{|$val.starttime|}</td>
+			<td>{|$val.circaendtime|}</td>
+			<td>
+				{|if $val.stat == '1'|}
+					<font color="red">{|$lang.finished|}</font>
+				{|else|}
+					<font color="green">{|$lang.action|}</font>
+				{|/if|}
+			</td>
+			<td>
+				<a href="?module=admin&act=delete&obj=raidlog&id={|$val.id|}" onclick="return confirmLink(this, 'delete the record?')">{|$lang.delete|}</a> 
+				{|if $val.stat == '0'|}
+				<a href="?module=admin&act=modify&obj=raidlog&id={|$val.id|}">{|$lang.modify|}</a>  
+				<a href="?module=admin&act=updateByGet&obj=endraidlog&id={|$val.id|}" onclick="return confirmLink(this, 'Close the raid?')">{|$lang.finished|}</a> 
+				<a href="phpraidviewer.php?do=download&raidid={|$val.id|}" target="_blank">{|$lang.makephpraid|}</>
+				{|/if|}
+			</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="20">{|$pageText|}</td>
+  </tr>
+</table>
+
+<table width="100%" border=0>
+<tr>
+	<td width="60%">
+		<FIELDSET style="padding: 10px 10px 10px 10px;">
+						<LEGEND style="margin-bottom: 4px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold;"><b>{|$lang.add|}{|$lang.action|}</b></LEGEND>				
+		<table border="0" bgcolor="#DEDEDE">
+		 <form action="index.php" name="form1" method="GET">
+		  <tr> 
+			<td width="20%">{|$lang.configure|}
+			<input type="hidden" name="module" value="admin" />
+			<input type="hidden" name="act" value="list" />
+			<input type="hidden" name="obj" value="raidlog" />
+			</td>
+			<td>
+				<select name="rid" class="input" onchange="javascript:form.submit();">
+				{|html_options options=$configure selected=$getval.rid|}
+				</select>
+			</td>
+		  </tr>
+		  </form>
+		  <form action="index.php?module=admin&act=add" name="form1" method="post">
+		  <tr> 
+			<td>
+				{|$lang.name|}
+				<input type="hidden" name="obj" value="raidlog" />
+				<input type="hidden" name="rid" value="{|$getval.rid|}" />
+			</td>
+			<td><input type="text" name="name" id="name" value="{|$userdata.name|}" size="40"></td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.invitetime|}</td>
+			<td>
+				<input type="text" name="invitedate" id="invitedate" value="{|$pageinfo.invitedate|}" size="10">
+				&nbsp;&nbsp;
+				<select name="invitetime1">
+				{|html_options options=$pageinfo.hours selected=$pageinfo.invitetime1|}
+				</select>
+				:
+				<select name="inviteminutes">
+				{|html_options options=$pageinfo.minutes selected=$pageinfo.inviteminutes|}
+				</select>
+			</td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.starttime|}</td>
+			<td>
+				<select name="starttime1">
+				{|html_options options=$pageinfo.hours selected=$pageinfo.starttime1|}
+				</select>
+				:
+				<select name="startminutes">
+				{|html_options options=$pageinfo.minutes selected=$pageinfo.startminutes|}
+				</select>
+			</td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.circaendtime|}</td>
+			<td>
+				<select name="circaendtime1">
+				{|html_options options=$pageinfo.hours selected=$pageinfo.circaendtime1|}
+				</select>
+				:
+				<select name="circaendminutes">
+				{|html_options options=$pageinfo.minutes selected=$pageinfo.circaendminutes|}
+				</select>
+			</td>
+		  </tr>
+		  <tr> 
+			<td colspan=2>{|$lang.freezelimit|}:
+				<select name="freezelimit" class="input">
+					<option label="0.5" value="0.5">0.5</option>
+					<option label="1" value="1">1</option>
+					<option label="2" value="2">2</option>
+					<option label="3" value="3">3</option>
+					<option label="4" value="4">4</option>
+					<option label="5" value="5">5</option>
+					<option label="6" value="6">6</option>
+					<option label="7" value="7">7</option>
+					<option label="8" value="8">8</option>
+					<option label="9" value="9">9</option>
+				</select>
+			</td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.notes|}</td>
+			<td>
+				<textarea name="notes" rows="3" cols="30" class="input">{|$userdata.notes|}</textarea>
+			</td>
+		  </tr>
+		<tr>
+		<td></td>
+		<td class="navtext"><input type='submit' value="{|$lang.add|}{|$lang.action|}"></td>
+		</tr>
+		</form>
+		</table>
+		</FIELDSET>
+	</td>
+	<td>
+		<table width="100%" border=1>
+		<tr class="title"><td colspan=2>{|$lang.configure|}</td></tr>
+		<tr><td width="40%">{|$lang.raidmax|}</td><td>{|$raidcfg.maxnum|}</td></tr>
+		<tr><td>{|$lang.minlevel|}</td><td>{|$raidcfg.minlevel|}</td></tr>
+		<tr><td>{|$lang.maxlevel|}</td><td>{|$raidcfg.maxlevel|}</td></tr>
+		<tr><td>{|$lang.autoqueue|}</td>
+			<td>{|if $raidcfg.autoqueue == '1'|}
+				<input name='autoqueue' type='checkbox' value="1" class="input" checked disabled="true">
+				{|else|}
+					<input name='autoqueue' type='checkbox' value="1" class="input" disabled="true">
+				{|/if|}
+			</td>
+		</tr>
+
+		{|foreach item=val key=key from=$classarr|}
+		<tr>
+			<td>
+				{|$val|}
+			</td>
+			<td>{|$calsscfg.$key|}</td>
+		</tr>
+		{|/foreach|}
+
+		  <tr> 
+			<td>{|$lang.resistance.0|}</td>
+			<td>{|$resistance.0|}</td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.resistance.1|}</td>
+			<td>{|$resistance.1|}</td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.resistance.2|}</td>
+			<td>{|$resistance.2|}</td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.resistance.3|}</td>
+			<td>{|$resistance.3|}</td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.resistance.4|}</td>
+			<td>{|$resistance.4|}</td>
+		  </tr>
+
+		</table>
+	</td>
+</tr>
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script src="./script/prototype.lite.js" type="text/javascript"></script>
+<script src="./script/moo.fx.js" type="text/javascript"></script>
+<script src="./script/moo.fx.pack.js" type="text/javascript"></script>
+<style>
+body {
+	font:12px Arial, Helvetica, sans-serif;
+	color: #000;
+}
+#container {
+	width: 170px;
+}
+H1 {
+	font-size: 11px;
+	margin: 0px;
+	width: 170px;
+	cursor: pointer;
+	height: 22px;
+	line-height: 20px;	
+}
+H1 a {
+	display: block;
+	padding-top: 1px;
+	padding-right: 8px;
+	padding-bottom: 0px;
+	padding-left: 8px;	
+	width: 170px;
+	color: #000;
+	height: 22px;
+	text-decoration: none;	
+	moz-outline-style: none;
+	background-image: url('./theme/{|$theme|}/images/thread-topic-bg2.gif');
+	background-repeat: repeat-x;
+}
+.content{
+	padding-left: 8px;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+	<H1 class="title"><A href="javascript:void(0)"><font color="#458B00">{|$lang.usermanager|}</font></a></H1>
+	<div class="content"><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=userlist' target='mainFrame'>{|$lang.userlist|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=adduserform' target='mainFrame'>{|$lang.adduser|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=managerlist' target='mainFrame'>{|$lang.manager|}{|$lang.manage|}</a></p>
+	</div>
+	<H1 class="title"><A href="javascript:void(0)"><font color="#458B00">{|$lang.configmanage|}</font></a></H1>
+	<div class="content"><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=baseinfo' target='mainFrame'>{|$lang.configmanage|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=racelist' target='mainFrame'>{|$lang.racemanage|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=worklist' target='mainFrame'>{|$lang.workmanage|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=eventtypelist' target='mainFrame'>{|$lang.eventtypemanage|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=usergrouplist' target='mainFrame'>{|$lang.usergroupmanage|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=viewall' target='mainFrame'>{|$lang.viewall|}{|$lang.copy|}{|$lang.configure|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=mcopy' target='mainFrame'>{|$lang.multicopymanage|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=otherSet' target='mainFrame'>{|$lang.note20|}</a></p><p>
+	&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=backup&act=Databackup' target='mainFrame'>{|$lang.database|}{|$lang.manage|}</a></p>
+	</div>
+	<H1 class="title"><A href="javascript:void(0)"><font color="#458B00">{|$lang.eventmanage|}</font></a></H1>
+	<div class="content"><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=eventlist' target='mainFrame'>{|$lang.eventlist|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=addeventform' target='mainFrame'>{|$lang.addevent|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=raidcfg' target='mainFrame'>{|$lang.action|}{|$lang.configure|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=list&obj=raidlog' target='mainFrame'>{|$lang.action|}{|$lang.manage|}</a></p>
+	</div>
+	<H1 class="title"><A href="javascript:void(0)"><font color="#458B00">{|$lang.itemmanage|}</font></a></H1>
+	<div class="content"><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=itemlist' target='mainFrame'>{|$lang.item|}{|$lang.list|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=additemform' target='mainFrame'>{|$lang.additem|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=itemdislist' target='mainFrame'>{|$lang.itemdislist|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=itemdisform' target='mainFrame'>{|$lang.itemdis|}</a></p>
+	</div>
+	<H1 class="title"><a href="javascript:void(0)"><font color="#458B00">{|$lang.dkp|}{|$lang.manage|}</font></a></H1>
+	<div class="content"><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=dkplist' target='mainFrame'>{|$lang.dkp|}{|$lang.list|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=dkpdislist' target='mainFrame'>{|$lang.dkp|}{|$lang.dis|}{|$lang.list|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=dkpAdjustmentsform' target='mainFrame'>{|$lang.user|}{|$lang.dis|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=dkpeventdisform' target='mainFrame'>{|$lang.dkp|}{|$lang.event|}{|$lang.dis|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=ShowRaidLogForm' target='mainFrame'>{|$lang.dkp|}{|$lang.raidlog|}</a></p>
+	</div>
+	<H1 class="title"><a href="javascript:void(0)"><font color="#458B00">{|$lang.function|}</font></a></H1>
+	<div class="content"><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=list&obj=syslog' target='mainFrame'>{|$lang.note52|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=list&obj=dkpunite' target='mainFrame'>{|$lang.dkp|}{|$lang.unite|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=guildhall' target='mainFrame'>{|$lang.guild|}{|$lang.info|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=newslist' target='mainFrame'>{|$lang.news|}{|$lang.manage|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=addnewsform' target='mainFrame'>{|$lang.add|}{|$lang.news|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php' target='_top'>{|$lang.goto|}{|$lang.page_first|}</a></p><p>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href='index.php?module=admin&act=logout' target='_top'>{|$lang.logout|}{|$lang.manage|}</a></p>
+	</div>
+</div>
+<script type="text/javascript">
+	var contents = document.getElementsByClassName('content');
+	var toggles = document.getElementsByClassName('title');
+
+	var myAccordion = new fx.Accordion(
+		toggles, contents, {opacity: true, duration: 400}
+	);
+	myAccordion.showThisHideOpen(contents[0]);
+</script>
+</body>
+</html>

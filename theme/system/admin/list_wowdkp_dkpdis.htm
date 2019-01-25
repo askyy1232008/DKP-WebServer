@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.dkp|}{|$lang.dis|}{|$lang.list|}</title>
+<script language="JavaScript">
+function CheckAllByName(formId, chkName, isChecked) {
+	var form = document.getElementById(formId);
+	for (var i=0; i<form.elements.length; i++) {
+		var c = form.elements[i];
+		if (c.name == chkName && c.type == 'checkbox'){
+			c.checked = isChecked;
+			continue;
+		} 
+	}
+}
+</script>
+
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+
+</head>
+
+<body>
+<table width="100%" border="0">
+<form method="get" action="index.php">
+	<tr class="title">
+		<td colspan="6">{|$lang.dkp|}{|$lang.dis|}{|$lang.list|} 
+		<input type="hidden" name="module" value="admin" />
+		<input type="hidden" name="act" value="dkpdislist" />
+		<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'user');">
+		<select name="cid" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$copyarray selected=$getval.cid|}
+		</select>
+		<select name="obj" class="input">
+		{|html_options options=$classArr selected=$getval.obj|}
+		</select>
+		<input type="submit" value="GO">
+		</td>
+	</tr>
+</form>
+
+  <tr class="navtext">
+  	<td>{|$lang.num|}</td>
+  	<td>{|$lang.user|}{|$lang.name|}</td>
+  	<td>{|$lang.event|truncate:20:"...":true|}</td>
+  	<td>{|$lang.dis|}{|$lang.dkp|}{|$lang.value|}</td>
+	<td>{|$lang.dis|}{|$lang.time|}</td>
+    <td>{|$lang.opertion|}</td>
+  </tr>
+
+<form method="POST" action="index.php?module=admin&act=fulldelete" name="form1" id="form1">
+  {|foreach item=val from=$userdata|}
+  <tr bgcolor="{|cycle values='#252525,#161616'|}">
+			<td><input name='uidselect[]' type='checkbox' value="{|$val.id|}">{|$val.id|}</td>
+			<td>{|$val.uid|}</td>
+			<td>{|$val.eid|}</td>
+			<td>{|$val.value|}</td>
+			<td>{|$val.distime|}</td>
+		<td><!--
+		<a href="?module=admin&act=delete&obj=itemdis&id={|$val.id|}" onclick="return confirmLink(this, 'delete the record?')">{|$lang.delete|}</a>--> 
+		<a href="?module=admin&act=modify&obj=dkpdis&id={|$val.id|}">{|$lang.modify|}</a> </td>
+  </tr>
+  {|/foreach|}
+<tr> 
+    <td colspan="8">&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="radio" name="chg" onClick="CheckAllByName('form1', 'uidselect[]', true)">{|$lang.selectall|}
+	<input type="radio" name="chg"  onClick="CheckAllByName('form1', 'uidselect[]', false)">{|$lang.note30|}
+	<input type="hidden" name="obj" value="itemdis" />
+	<input type="submit" name="submit" value="{|$lang.cancle|}{|$lang.dis|}" onclick="return confirmLink(this, 'cancle the records?')">
+	</td>
+  </tr>
+</form>
+
+  <tr>
+    <td colspan="6">{|$pageText|}</td>
+  </tr>
+</table>
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+</body>
+</html>
+<!--0.083480s-->

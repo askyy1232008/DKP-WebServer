@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.user|}{|$lang.dkp|}{|$lang.list|}</title>
+</head>
+
+<body>
+<table width="100%" border="0">
+<form method="get" action="index.php">
+	<tr>
+		<td colspan="7" class="sectiontitle">{|$lang.user|}{|$lang.dkp|}{|$lang.list|}
+		<input type="hidden" name="module" value="admin" />
+		<input type="hidden" name="act" value="dkplist" />
+		<select name="cid" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$copyarray selected=$getval.cid|}
+		</select>
+		<select name="obj" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$classArr selected=$getval.obj|}
+		</select>
+		</td>
+	</tr>
+</form>
+
+  <tr class="contenttitle">
+  	<td><a href="{|$baseurl|}&orderby=id">{|$lang.user|}</a></td>
+  	<td><a href="{|$baseurl|}&orderby=name">{|$lang.user|}{|$lang.name|}</a></td>
+  	<td><a href="{|$baseurl|}&orderby=workname">{|$lang.work|}</a></td>
+  	<td><a href="{|$baseurl|}&orderby=racename">{|$lang.race|}</a></td>
+  	<td><a href="{|$baseurl|}&orderby=level">{|$lang.level|}</a></td>
+	<td><a href="{|$baseurl|}&orderby=value">{|$lang.dkp|}{|$lang.value|}</a></td>
+  </tr>
+
+  {|foreach item=val from=$userdata|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+			<td>{|$val.id|}</td>
+			<td>{|$val.name|}</td>
+			<td>{|$val.workname|}</td>
+			<td>{|$val.racename|}</td>
+			<td>{|$val.level|}</td>
+			<td>{|$val.value|}</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="7">{|$pageText|}</td>
+  </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,58 @@
+{|include file="header.htm"|}
+<center>
+<table width="90%" border="0">
+  <tr class="sectiontitle">
+    <td><div align="center">{|$eventinfo.name|}</div></td>
+  </tr>
+  <tr>
+    <td><b>{|$lang.time|}:{|$eventinfo.raidtime|}</b></td>
+  </tr>
+  <tr>
+    <td style="text-indent:1cm;">{|$eventinfo.notes|}</td>
+  </tr>
+  <tr><td>&nbsp;</td></tr>
+
+  <tr>
+	<td><b>{|$lang.item|}:</b></td>
+  </tr>
+  <tr>
+	<td>
+	<table width="100%">
+		<tr class="contenttitle"><th>{|$lang.item|}</th><th>{|$lang.dkp|}</th><th>{|$lang.earn|}</th><th>{|$lang.time|}</th></tr>
+		{|foreach from=$itemsArr item=iv key=key|}
+		<tr>
+		<td>
+			<a class="tooltips" href="?module=index&act=items&iid={|$iv.id|}" onMouseOver="ajaxRead('id={|$iv.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$iv.itemid|}', '{|$iv.itemid|}', '{|$iv.name|}')"> <font color="#{|$iv.icolor|}">{|$iv.name|}</font> <span id="dkper_tooltips_{|$key|}{|$iv.itemid|}"></span></a>
+		</td>
+		<td><div align="center">{|$iv.value|}</div></td>
+		<td><a href="?module=index&act=standings&keyword={|$iv.urlusername|}">{|$iv.username|}</a></td>
+		<td><div align="center">{|$iv.intotime|}</div></td>
+		</tr>
+		{|/foreach|}
+	</table>
+	</td>
+  </tr>
+
+  <tr><td>&nbsp;</td></tr>
+
+  <tr>
+    <td><b>{|$lang.userlist|}</b></td>
+  </tr>
+  <tr>
+    <td>
+		<table width="70%">
+		{|foreach from=$userinfo item=uval|}
+		<tr class="{|cycle values="rowa,rowb"|}">
+		<td><a href="?module=index&act=standings&keyword={|$uval.urlname|}">{|$uval.name|}</a></td>
+		</tr>
+		{|/foreach|}
+		</table>
+	</td>
+  </tr>
+
+  <tr>
+    <td align="right" class="small">{|$lang.sitetitle|}</td>
+  </tr>
+</table>
+</center>
+{|include file="foot.htm"|}

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<form name="form1" method="post" action="index.php?module=admin&act=update">
+  <table width="100%" border="0">
+    <tr class="title"> 
+      <td colspan="2">{|$lang.uppasswd|}
+	  <input type="hidden" name="obj" id="obj" value="admuser">
+	  <input type="hidden" name="id" id="id" value="{|$uid|}">
+	  </td>
+    </tr>
+    <tr> 
+      <td width="17%"><div align="right">{|$lang.current|}{|$lang.password|}</div></td>
+      <td width="83%"><input name="current" type="password" id="current"></td>
+    </tr>
+    <tr> 
+      <td><div align="right">{|$lang.uppasswd|}</div></td>
+      <td><input name="password" type="password" id="password"></td>
+    </tr>
+    <tr> 
+      <td><div align="right">{|$lang.repasswd|}</div></td>
+      <td><input name="repasswd" type="password" id="repasswd"></td>
+    </tr>
+    <tr> 
+      <td><div align="right"></div></td>
+      <td><input type="submit" name="Submit" ></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

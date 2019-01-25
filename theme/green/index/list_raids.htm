@@ -1,0 +1,36 @@
+{|include file="header.htm"|}
+
+<table width="100%" border="0">
+	<tr class="sectiontitle">
+		<td colspan="5">{|$lang.raid|}{|$lang.list|}
+		<form method="get" action="index.php">
+		<input type="hidden" name="module" value="index" />
+		<input type="hidden" name="act" value="raids" />
+		<input type="text" name="keyword" value="{|$getval.keyword|}" />
+		<input type="submit" value="{|$lang.raid|}{|$lang.search|}">
+		</form>	
+		</td>
+	</tr>
+
+  <tr class="contenttitle">
+  	<th>{|$lang.num|}</th>
+  	<th><a href="?module={|$getval.module|}&act={|$getval.act|}&keyword={|$getval.keyword|}&orderby=name">{|$lang.name|}</a></th>
+  	<th><a href="?module={|$getval.module|}&act={|$getval.act|}&keyword={|$getval.keyword|}&orderby=raidtime">{|$lang.raid|}{|$lang.time|}</a></th>
+  	<th><a href="?module={|$getval.module|}&act={|$getval.act|}&keyword={|$getval.keyword|}&orderby=value">{|$lang.dkp|}{|$lang.value|}</a></th>
+  </tr>
+
+  {|foreach item=val from=$userdata|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+			<td align="center">{|$val.id|}</td>
+			<td><a href="?module={|$getval.module|}&act=viewraids&id={|$val.id|}" target="_blank">{|$val.name|}</a></td>
+			<td align="center">{|$val.raidtime|}</td>
+			<td align="center">{|$val.value|}</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="5">{|$pageText|}</td>
+  </tr>
+</table>
+
+{|include file="foot.htm"|}

@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.item|}{|$lang.list|}</title>
+<script language="JavaScript">
+function CheckAllByName(formId, chkName, isChecked) {
+	var form = document.getElementById(formId);
+	for (var i=0; i<form.elements.length; i++) {
+		var c = form.elements[i];
+		if (c.name == chkName && c.type == 'checkbox'){
+			c.checked = isChecked;
+			continue;
+		} 
+	}
+}
+</script>
+
+<script type="text/javascript">
+<!--
+function ajaxRead(file, itemobj, itemid, itemname){
+	var xmlObj = null;
+	if(window.XMLHttpRequest){
+		xmlObj = new XMLHttpRequest();
+	} else if(window.ActiveXObject){
+		xmlObj = new ActiveXObject("Microsoft.XMLHTTP");
+	} else {
+		return;
+	}
+	if (!itemid && !itemname)
+	{
+		return false;
+	}
+	file	= './getItem.php?' + file + '&iname=' + encodeURI(itemname)
+	xmlObj.onreadystatechange = function(){
+		if(xmlObj.readyState == 4){
+			updateObj(itemobj, xmlObj.responseText);
+		}
+	}
+	xmlObj.open ('GET', file, true);
+	xmlObj.send ('');
+}
+
+function updateObj(obj, data){
+	document.getElementById(obj).innerHTML = data;
+}
+-->
+</script>
+
+</head>
+
+<body>
+
+<table width="100%" border="0">
+<form method="get" action="index.php">
+	<tr class="title">
+		<td colspan="8">{|$lang.item|}{|$lang.list|}
+		<input type="hidden" name="module" value="admin" />
+		<input type="hidden" name="act" value="itemlist" />
+		<select name="eid" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$eventarray selected=$getval.eid|}
+		</select>
+		</td>
+	</tr>
+</form>
+
+  <tr class="navtext">
+  	<td><a href="{|$baseurl|}&orderby=id">{|$lang.num|}</a></td>
+  	<td><a href="{|$baseurl|}&orderby=eid">{|$lang.event|}</a></td>
+  	<td><a href="{|$baseurl|}&orderby=name">{|$lang.name|}</a></td>
+	<td><a href="{|$baseurl|}&orderby=intotime">{|$lang.time|}</a></td>
+	<td><a href="{|$baseurl|}&orderby=num">{|$lang.note23|}</a></td>
+  	<td>{|$lang.notes|}</td>
+  	<td>{|$lang.stat|}</td>
+      <td>{|$lang.opertion|}</td>
+  </tr>
+
+<form method="POST" action="index.php?module=admin&act=fulldelete" name="form1" id="form1">
+  {|foreach item=val key=key from=$userdata|}
+  <tr bgcolor="{|cycle values="#252525,#161616"|}">
+			<td><input name='uidselect[]' type='checkbox' value="{|$val.id|}">{|$val.id|}</td>
+			<td>{|$val.eid|}</td>
+			<td>
+			{|if $val.icolor<>''|}
+				<a class="tooltips" href="#tooltips" onMouseOver="ajaxRead('id={|$val.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$val.itemid|}', {|$val.itemid|}, '{|$val.name|}')"> <font color="#{|$val.icolor|}">{|$val.name|}</font> <span id="dkper_tooltips_{|$key|}{|$val.itemid|}"></span></a>
+			{|else|}
+				<a class="tooltips" href="#tooltips" onMouseOver="ajaxRead('id={|$val.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$val.itemid|}', {|$val.itemid|}, '{|$val.name|}')">{|$val.name|}<span id="dkper_tooltips_{|$key|}{|$val.itemid|}"></span></a>
+			{|/if|}
+			</td>
+			<td>{|$val.intotime|}</td>
+			<td>{|$val.num|}</td>
+			<td>{|$val.notes|truncate:20:"...":true|}</td>
+			<td>{|if $val.stat=='1'|}{|$lang.dose|}{|else|}<font color="red">{|$lang.doesnot|}</font>{|/if|}</td>
+		<td>{|if $val.stat=='0'|}
+			<a href="?module=admin&act=delete&obj=item&id={|$val.id|}" onclick="return confirmLink(this, 'delete the record?')">{|$lang.delete|}</a> {|/if|}
+			<a href="?module=admin&act=modify&obj=item&id={|$val.id|}">{|$lang.modify|}</a> 
+			{|if $val.stat=='0'|}
+			<a href="?module=admin&act=itemdisform&id={|$val.id|}">{|$lang.itemdis|}</a>
+			{|/if|} &nbsp;&nbsp;
+			</td>
+  </tr>
+  {|/foreach|}
+  <tr> 
+    <td colspan="8">&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="radio" name="chg" onClick="CheckAllByName('form1', 'uidselect[]', true)">{|$lang.selectall|}
+	<input type="radio" name="chg"  onClick="CheckAllByName('form1', 'uidselect[]', false)">{|$lang.note30|}
+	<input type="hidden" name="obj" value="item" />
+	<input type="submit" name="submit" value="{|$lang.delete|}{|$lang.item|}" onclick="return confirmLink(this, 'delete the records?')">
+	</td>
+  </tr>
+</form>
+  <tr>
+    <td colspan="8">{|$pageText|}</td>
+  </tr>
+</table>
+</body>
+
+</html>

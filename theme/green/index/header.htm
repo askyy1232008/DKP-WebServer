@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/css.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./script/general.css" />
+<title>{|$lang.sitetitle|}</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+<!--
+function ajaxRead(file, itemobj, itemid, itemname){
+	var xmlObj = null;
+	if(window.XMLHttpRequest){
+		xmlObj = new XMLHttpRequest();
+	} else if(window.ActiveXObject){
+		xmlObj = new ActiveXObject("Microsoft.XMLHTTP");
+	} else {
+		return;
+	}
+	if (!itemid && !itemname)
+	{
+		return false;
+	}
+	file	= './getItem.php?' + file + '&iname=' + encodeURI(itemname)
+	xmlObj.onreadystatechange = function(){
+		if(xmlObj.readyState == 4){
+			updateObj(itemobj, xmlObj.responseText);
+		}
+	}
+	xmlObj.open ('GET', file, true);
+	xmlObj.send ('');
+}
+
+function updateObj(obj, data){
+	document.getElementById(obj).innerHTML = data;
+}
+-->
+</script>
+
+
+<table width="100%" border="0" cellspacing="1" cellpadding="2">
+  <tr>
+    <td width="34%"><img border="0" src="./theme/{|$theme|}/images/logo_wow.gif"></td>
+    <td width="66%"><div align="center">
+        <table width="100%" border="0">
+		<form method="get" action="index.php">
+          <tr>
+            <td><div align="center" class="maintitle">{|$lang.sitetitle|}</div></td>
+          </tr>
+          <tr>
+            <td><div align="center"></div></td>
+          </tr>
+          <tr>
+            <td>
+				<span class="navtitle">
+									<a href="?module=index&act=news">{|$lang.news|}</a> 
+                | <a href="?module=index&act=standings">{|$lang.user|}</a> 
+				| <a href="?module=index&act=viewall">{|$lang.viewall|}</a> 
+                | <a href="?module=index&act=events">{|$lang.event|}</a>
+				| <a href="?module=index&act=items">{|$lang.item|}</a> 
+                | <a href="?module=index&act=itemdis">{|$lang.items|}{|$lang.dis|}</a> 
+				| <a href="?module=index&act=list&obj=actionlist">{|$lang.action|}</a>
+				| <a href="?module=admin">{|$lang.manage|}</a> &nbsp;
+				<input type="hidden" name="module" value="index" />
+				<input type="hidden" name="act" value="setlang" />
+				<select name="lang" class="input" onchange="javascript:form.submit();">
+				{|html_options options=$langArr selected=$smarty.cookies.wow_cfg_lang|}
+				</select>&nbsp;
+
+				{|if $islogin=='1'|}
+				{|if $smarty.session.member.uid|}
+				<a href="index.php?module=index&act=viewmember&id={|$smarty.session.member.uid|}">{|$lang.user|}{|$lang.hall|}</a> | 
+				<a href="index.php?module=login&act=logout">{|$lang.logout|}</a>
+				{|else|}
+				<a href="index.php?module=index&act=registe">{|$lang.registe|}</a> | 
+				<a href="index.php?module=index&act=showlogin">{|$lang.login|}</a>
+				{|/if|}
+				{|/if|}
+								</span>
+			</td>
+          </tr>
+		  </form>
+        </table>
+      </div></td>
+  </tr>
+</table>
+
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>

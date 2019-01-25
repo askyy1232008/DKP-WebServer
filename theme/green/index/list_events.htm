@@ -1,0 +1,56 @@
+{|include file="header.htm"|}
+
+<table width="100%" border="0">
+<form method="get" action="index.php">	<tr class="sectiontitle">
+		<td colspan="5">
+		{|$lang.copy|}
+		<select name="cid" class="input" onchange="javascript:form.submit();">	
+		{|html_options options=$copyarray selected=$getval.cid|}			
+		</select>
+		{|$lang.event|}{|$lang.list|}
+		<input type="hidden" name="module" value="index" />
+		<input type="hidden" name="act" value="events" />
+		<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'event');" />
+		<input type="submit" value="{|$lang.event|}{|$lang.search|}">
+		</td>
+	</tr>
+</form>
+
+  <tr class="contenttitle">
+  	<th>{|$lang.num|}</th>
+  	<th><a href="?module={|$getval.module|}&act={|$getval.act|}&keyword={|$getval.keyword|}&orderby=name">{|$lang.name|}</a></th>
+  	<th>{|$lang.type|}</th>
+  	<th><a href="?module={|$getval.module|}&act={|$getval.act|}&keyword={|$getval.keyword|}&orderby=raidtime">{|$lang.time|}</a></th>
+  </tr>
+
+  {|foreach item=val from=$userdata|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+			<td align="center">{|$val.id|}</td>
+			<td><a href="?module={|$getval.module|}&act=viewraids&id={|$val.id|}" target="_blank">{|$val.name|}</a></td>
+			<td>{|$val.eventtype|}</td>
+			<td align="center">{|$val.raidtime|}</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="5">{|$pageText|}</td>
+  </tr>
+</table>
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+{|include file="foot.htm"|}

@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.action|}{|$lang.configure|}{|$lang.list|}</title>
+</head>
+
+<body>
+
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<div id="dhtmltooltip"></div>
+<script src="./script/tooltips.js" language="javascript"></script>
+
+<table width="100%" border="0">
+	<tr class="title">
+		<td colspan="20">{|$lang.action|}{|$lang.configure|}{|$lang.list|}</td>
+	</tr>
+
+  <tr class="navtext">
+  	<td>{|$lang.num|}</td>
+  	<td>{|$lang.configure|}{|$lang.name|}</td>
+  	<td>{|$lang.raidmax|}</td>
+  	
+		{|foreach item=val from=$classarr|}
+		<td>
+			{|$val|}
+		</td>
+		{|/foreach|}
+	
+
+	<td>{|$lang.minlevel|}</td>
+	<td>{|$lang.maxlevel|}</td>
+	<td>{|$lang.opertion|}</td>
+  </tr>
+
+  {|foreach item=val from=$userdata|}
+  <tr bgcolor="{|cycle values="#252525,#161616"|}">
+			<td>{|$val.id|}</td>
+			<td><a href='#' onMouseover="ddrivetip('{|$val.notes|}')"; onMouseout="hideddrivetip()">{|$val.name|}</a></td>
+			<td>{|$val.maxnum|}</td>
+			
+				{|foreach item=val2 from=$val.class|}
+				<td>
+				{|$val2|}
+				</td>
+				{|/foreach|}
+			
+			<td>{|$val.minlevel|}</td>
+			<td>{|$val.maxlevel|}</td>
+			<td>
+				<a href="?module=admin&act=delete&obj=raidcfg&id={|$val.id|}" onclick="return confirmLink(this, 'delete the record?')">{|$lang.delete|}</a> 
+				<a href="?module=admin&act=modify&obj=raidcfg&id={|$val.id|}">{|$lang.modify|}</a> 
+			</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="20">{|$pageText|}</td>
+  </tr>
+</table>
+
+<FIELDSET style="padding: 10px 10px 10px 10px;">
+				<LEGEND style="margin-bottom: 4px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold;"><b>{|$lang.add|}{|$lang.action|}{|$lang.configure|}</b></LEGEND>				
+<table width="100%" border="0" bgcolor="#DEDEDE">
+<form action="index.php?module=admin&act=add" name="form1" method="post">
+  <tr> 
+    <td width="15%">
+		{|$lang.name|}
+		<input type="hidden" name="obj" value="raidcfg" />
+	</td>
+	<td><input type="text" name="name" id="name" value="{|$userdata.name|}"></td>
+  </tr>
+  <tr> 
+    <td>{|$lang.raidmax|}</td>
+	<td><input type="text" name="raidmax" id="raidmax" value="" size=5> </td>
+  </tr>
+  <tr> 
+    <td>{|$lang.minlevel|}</td>
+	<td><input type="text" name="minlevel" id="minlevel" value="" size=5> </td>
+  </tr>
+  <tr> 
+    <td>{|$lang.maxlevel|}</td>
+	<td><input type="text" name="maxlevel" id="maxlevel" value="" size=5> </td>
+  </tr>
+  <tr> 
+    <td>{|$lang.autoqueue|}</td>
+	<td>
+		<input name='autoqueue' type='checkbox' value="1" class="input" checked>
+	</td>
+  </tr>
+
+<tr>
+<td colspan="2" class="navtext">{|$lang.reqclass|}</td>
+</tr>
+{|foreach item=val key=key from=$classarr|}
+  <tr> 
+    <td>{|$val|}</td>
+	<td><input type="text" name="class[{|$key|}]" value="" size=5> </td>
+  </tr>
+{|/foreach|}
+
+<tr>
+<td colspan="2" class="navtext">{|$lang.reqresistance|}</td>
+</tr>
+  <tr> 
+    <td>{|$lang.resistance.0|}</td>
+	<td><input type="text" name="arcane" id="arcane" value="" size=5> </td>
+  </tr>
+  <tr> 
+    <td>{|$lang.resistance.1|}</td>
+	<td><input type="text" name="fire" id="fire" value="" size=5> </td>
+  </tr>
+  <tr> 
+    <td>{|$lang.resistance.2|}</td>
+	<td><input type="text" name="frost" id="frost" value="" size=5> </td>
+  </tr>
+  <tr> 
+    <td>{|$lang.resistance.3|}</td>
+	<td><input type="text" name="nature" id="nature" value="" size=5> </td>
+  </tr>
+  <tr> 
+    <td>{|$lang.resistance.4|}</td>
+	<td><input type="text" name="shadow" id="shadow" value="" size=5> </td>
+  </tr>
+<tr>
+<td></td>
+<td class="navtext"><input type='submit' value="{|$lang.add|}{|$lang.configure|}"></td>
+</tr>
+</table>
+</FIELDSET>
+</form>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+</body>
+</html>

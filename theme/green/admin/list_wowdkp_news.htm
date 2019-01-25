@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.news|}{|$lang.list|}</title>
+</head>
+
+<body>
+<table width="100%" border="0">
+	<tr>
+		<td colspan="4" class="sectiontitle">{|$lang.news|}{|$lang.list|}</td>
+	</tr>
+
+  <tr class="contenttitle">
+  	<td>{|$lang.num|}</td>
+  	<td>{|$lang.title|}</td>
+  	<td>{|$lang.time|}</td>
+      <td>{|$lang.opertion|}</td>
+  </tr>
+
+  {|foreach item=val from=$userdata|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+			<td>{|$val.id|}</td>
+			<td><a href="index.php?module=index&act=viewnews&id={|$val.id|}" target="_blank" title="{|$val.content|truncate:60:"...":true|}">{|$val.title|truncate:60:"...":true|}</a></td>
+			<td>{|$val.posttime|}</td>
+		<td><a href="index.php?module=admin&act=delete&obj=news&id={|$val.id|}" onclick="return confirmLink(this, 'delete the record?')">{|$lang.delete|}</a> <a href="index.php?module=admin&act=modify&obj=news&id={|$val.id|}">{|$lang.modify|}</a></td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="4">{|$pageText|}</td>
+  </tr>
+</table>
+</body>
+</html>
+<!--0.099818s-->

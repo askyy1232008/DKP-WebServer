@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.additem|}</title>
+<script language=javascript>
+function changeformsoft(sf,st) {
+    var sform	= document.getElementById(sf);
+	sform.style.display = st;
+	return true;
+}
+function changeInputMode(obj){
+	//document.getElementById(obj).innerHTML = "<input name='uname' type='text' value='' />";
+	document.getElementById('itemdkp').style.display = 'block';
+}
+</script>
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+
+<table width="100%" border="0">
+  <tr> 
+    <td colspan="2" class="sectiontitle">{|if $act=='additem'|}{|$lang.additem|}{|else|}{|$lang.modify|}{|$lang.item|}{|/if|}</td>
+  </tr>
+  <form action="?module=admin&act={|$act|}" name="form1" method="post" id="form1">
+    <tr> 
+    <td>{|$lang.pleaselect|}{|$lang.event|}</td>
+    <td>
+	<select name="eid">
+		{|html_options options=$eventarray selected=$userdata.eid|}
+	</select>
+	</td>
+  </tr>
+    <tr> 
+    <td>{|$lang.item|}{|$lang.name|}</td>
+    <td><input type="text" name="name" id="itemname" value="{|$userdata.name|}" onkeyup="getIE(objInput);xajax_getInfo(document.getElementById('itemname').value,'item','itemname');"> 
+	<input type="hidden" name="obj" id="obj" value="{|$obj|}">
+	<input type="hidden" name="id" id="id" value="{|$userdata.id|}">
+	</td>
+  </tr>
+  <tr> 
+    <td>{|$lang.item|}{|$lang.note23|}</td>
+    <td><input type="text" name="num" id="num" value="{|$userdata.num|}"> 
+	</td>
+  </tr>
+
+{|if $showUser <> 'no'|}
+  <tr> 
+    <td>{|$lang.note24|}{|$lang.user|}</td>
+    <td>
+		<input id="uname" name="uname" size="35" type="text" onkeyup="getIE(objInput2);xajax_getInfo(document.getElementById('uname').value,'user','uname');changeInputMode(this);">
+	</td>
+  </tr>
+  
+  <tr> 
+    <td>&nbsp;</td>
+    <td><div id="itemdkp" style="display:none">
+		{|$lang.item|}{|$lang.dkp|}:
+		<input type="text" name="value" id="value" value="1"> 
+		</div>
+	</td>
+  </tr>
+{|/if|}
+
+
+   <tr> 
+    <td>{|$lang.notes|}</td>
+    <td>
+	<textarea name="notes" rows="5" cols="40">{|$userdata.notes|}</textarea>
+	</td>
+  </tr>
+  <tr> 
+    <td colspan="2"><input type="submit"></td>
+  </tr>
+  </form>
+</table>
+<script language="Javascript">
+var objInput = document.getElementById('itemname');
+var objInput2 = document.getElementById('uname');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+</script>
+
+</body>
+</html>
+

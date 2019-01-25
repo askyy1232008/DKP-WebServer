@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.modify|}{|$lang.event|}</title>
+</head>
+
+<body>
+<table width="100%" border="0">
+  <tr> 
+    <td colspan="2" class="sectiontitle">{|$lang.modify|}{|$lang.event|}</td>
+  </tr>
+  <form action="?module=admin&act={|$act|}" name="post" method="post">
+    <tr> 
+    <td width="20%">{|$lang.name|}</td>
+    <td><input type="text" name="name" id="name" value="{|$userdata.name|}" size="50"> 
+	<input type="hidden" name="obj" id="obj" value="{|$obj|}">
+	<input type="hidden" name="id" id="id" value="{|$userdata.id|}">
+	</td>
+  </tr>
+  <tr> 
+    <td width="20%">{|$lang.notes|}</td>
+    <td><input type="text" name="notes" id="notes" value="{|$userdata.notes|}" size="80"> 
+	</td>
+  </tr>
+  <tr> 
+    <td>{|$lang.copy|}</td>
+    <td>
+	<select name="cid">
+		{|html_options options=$copyarray selected=$userdata.cid|}
+	</select>
+	<input type="hidden" name="ocid" id="ocid" value="{|$userdata.cid|}">
+	</td>
+  </tr>
+    <tr> 
+    <td>{|$lang.eventtypemanage|}</td>
+    <td>
+	<select name="etid">
+		{|html_options options=$eventtype selected=$userdata.etid|}
+	</select>
+	</td>
+  </tr>
+    <tr> 
+    <td>{|$lang.event|}{|$lang.time|}</td>
+    <td><input type="text" name="raidtime" id="raidtime" value="{|$userdata.raidtime|}"> </td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td><a href="index.php?module=admin&act=dkpeventdisform&eid={|$userdata.id|}">{|$lang.modify|}{|$lang.event|}{|$lang.dkp|}</a></td>
+  </tr>
+  <tr> 
+    <td colspan="2" align=center><input type="submit"></td>
+  </tr>
+  </form>
+</table>
+</body>
+</html>

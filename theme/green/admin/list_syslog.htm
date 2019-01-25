@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<title>{|$lang.note52|}</title>
+</head>
+
+<body>
+<table width="100%" border="0">
+<form method="get" action="index.php">
+	<tr>
+		<td colspan="8" class="sectiontitle">{|$lang.note52|}
+		<input type="hidden" name="module" value="admin" />
+		<input type="hidden" name="act" value="list" />
+		<input type="hidden" name="obj" value="syslog" />
+		<select name="uid" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$userarray selected=$getval.uid|}
+		</select>
+		<input type="submit" value="{|$lang.search|}">
+		</td>
+	</tr>
+</form>
+
+  <tr class="contenttitle">
+  	<td>{|$lang.num|}</td>
+  	<td>{|$lang.manager|}</td>
+  	<td>{|$lang.opertion|}</td>
+	<td>{|$lang.object|}</td>
+	<td>{|$lang.notes|}</td>
+  	<td>{|$lang.opertion|}{|$lang.time|}</td>
+  </tr>
+
+  {|foreach item=val from=$userdata|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+			<td>{|$val.id|}</td>
+			<td>{|$val.uname|}</td>
+			<td>{|$val.op|}
+			</td>
+			<td>{|$val.obj|truncate:50:"...":true|}</td>
+			<td>{|$val.des|truncate:50:"...":true|}</td>
+			<td>{|$val.optime|date_format:"%Y-%m-%d"|}</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="8">{|$pageText|}</td>
+  </tr>
+</table>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<title>{|$pagedata.title|}</title>
+</head>
+
+<body>
+<form name="form1" method="post" action="index.php?module=admin&act=update">
+  <table width="100%" border="0">
+    <tr class="title"> 
+      <td colspan="2" class="sectiontitle">{|$lang.guild|}{|$lang.configure|}{|$lang.info|}</td>
+    </tr>
+	<tr> 
+      <td width="22%">{|$lang.location|}</td>
+      <td width="78%">
+	  <select name="location" class="input">
+		{|html_options options=$locationArray selected=$udata.location|}
+	  </select>
+        <input name="obj" type="hidden" id="obj" value="config"></td>
+    </tr>
+	<tr> 
+      <td width="22%">{|$lang.langtype|}</td>
+      <td width="78%">
+	  <select name="langtype" class="input">
+		{|html_options options=$langTypeArray selected=$udata.langtype|}
+	  </select>
+	  </td>
+    </tr>
+	<tr> 
+      <td width="22%">{|$lang.realm|}</td>
+      <td width="78%">
+	  <input name="realm" type="text" id="realm" value="{|$udata.realm|}" size="40">
+	  </td>
+    </tr>
+    <tr> 
+      <td width="22%">{|$lang.guild|}{|$lang.name|}</td>
+      <td width="78%"><input name="guildname" type="text" id="guildname" value="{|$udata.guildname|}" size="40">
+	  </td>
+    </tr>
+    <tr> 
+      <td>{|$lang.acttime|}</td>
+      <td><input name="acttime" type="text" id="acttime" value="{|$udata.acttime|}"> {|$lang.note36|} (1-9)</td>
+    </tr>
+	<tr> 
+      <td>{|$lang.user|}{|$lang.registe|}</td>
+      <td>
+	  <select name="islogin" class="input">
+		{|html_options options=$islogin selected=$udata.islogin|}
+		</select>
+	  </td>
+    </tr>
+	<tr> 
+      <td>{|$lang.isarmory|}</td>
+      <td>
+	  <select name="isarmory" class="input">
+		{|html_options options=$islogin selected=$udata.isarmory|}
+		</select>
+	  </td>
+    </tr>
+	<tr> 
+      <td>{|$lang.dkp|}{|$lang.decimal|}</td>
+      <td>
+	  <select name="sdecimal" class="input">
+		{|html_options options=$sdecimal selected=$udata.sdecimal|}
+		</select>
+	  </td>
+    </tr>
+	<tr> 
+      <td>{|$lang.defaultcopy|}</td>
+      <td>
+	  <select name="defaultcopy" class="input">
+		{|html_options options=$defaultcopy selected=$udata.defaultcopy|}
+		</select>
+	  </td>
+    </tr>
+    
+    <tr> 
+      <td>{|$lang.itemquality|}</td>
+      <td>
+	  <select name="itemquality" class="input">
+	  	{|foreach item=val key=key from=$itemquality|}
+	  	{|if $udata.itemquality == $key|}
+			<option value="{|$key|}" style="color:#{|$val|};" selected="selected">{|$lang.itemlevel.$key|}</option>
+		{|else|}
+		<option value="{|$key|}" style="color:#{|$val|};">{|$lang.itemlevel.$key|}</option>
+		{|/if|}
+		{|/foreach|}
+	  </select>
+	  </td>
+    </tr>
+    
+	<tr> 
+      <td>{|$lang.timezone|}{|$lang.configure|}</td>
+      <td>
+	  <select name="timezone" class="input">
+		{|html_options options=$timezoneArray selected=$udata.timezone|}
+		</select>
+	  </td>
+    </tr>
+    <tr> 
+      <td>{|$lang.style|}</td>
+      <td>
+	  <select name="dstyle" class="input">
+		{|html_options options=$stylearray selected=$udata.dstyle|}
+		</select>
+	  </td>
+    </tr>
+    
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" name="Submit" value="{|$lang.modify|}"></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

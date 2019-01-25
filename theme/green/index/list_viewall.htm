@@ -1,0 +1,66 @@
+{|include file="header.htm"|}
+
+<table width="100%" border="0">
+<form method="get" action="index.php">
+	<tr class="sectiontitle">
+		<td colspan="9">
+		<input type="hidden" name="module" value="index" />
+		<input type="hidden" name="act" value="viewall" />
+		{|$lang.user|}{|$lang.dkp|}{|$lang.list|}
+		<select name="obj" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$classArr selected=$getval.obj|}
+		</select>
+		<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}" size="10" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'user');" />
+		<input type="submit" value="{|$lang.search|}">
+		</td>
+	</tr>
+</form>		
+</table>
+
+<table width="100%" border="0" >
+  <tr class="contenttitle">
+	{|foreach item=val from=$contitle|}
+	<th>{|$val|}</th>
+	{|/foreach|}
+  </tr>
+  {|foreach item=val from=$userinfo|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+	{|foreach item=valk key=key from=$contitle|}
+		{|if $key=='uname'|}
+			<td>&nbsp;&nbsp;&nbsp;&nbsp;<a href="?module=index&act=viewmember&id={|$val.id|}" onmouseover="dkper_showinfo('{|$val.$key|}',event)" onmouseout="closedict();">{|$val.$key|}</a></td>
+		{|else|}
+			<td align="center">
+			{|if ($val.$key < 0)|}
+				<font color="red">{|$val.$key|}</font>
+			{|else|}
+				<font color="green">{|$val.$key|}</font>
+			{|/if|}
+			</td>
+		{|/if|}
+	{|/foreach|}
+  </tr>
+  {|/foreach|}
+  <tr>
+	<td colspan="10">{|$pageText|}</td>
+  </tr>
+</table>
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+{|include file="foot.htm"|}

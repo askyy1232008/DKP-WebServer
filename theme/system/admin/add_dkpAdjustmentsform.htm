@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.dkp|}{|$lang.dis|}</title>
+<script language="JavaScript">
+function CheckAllByName(formId, chkName, isChecked) {
+	var form = document.getElementById(formId);
+	for (var i=0; i<form.elements.length; i++) {
+		var c = form.elements[i];
+		if (c.name == chkName && c.type == 'checkbox'){
+			c.checked = isChecked;
+			continue;
+		} 
+	}
+}
+</script>
+
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+
+</head>
+
+<body>
+<table width="100%" border="0">
+  <tr class="title"> 
+    <td colspan="2">{|$lang.dkp|}{|$lang.dis|}</td>
+  </tr>
+  <form action="?module=admin&act={|$act|}" name="form1" method="post" id="form1">
+
+  <tr> 
+    <td>{|$lang.pleaselect|}{|$lang.user|}</td>
+    <td>
+	<input type="text" name="uid" id="keyword" value="{|$post.uid|}" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'user');" >
+	<select name="ugid">
+		{|html_options options=$usergroup selected=$post.ugid|}
+	</select>
+	<input type="submit" name="userselect" value="{|$lang.view|}{|$lang.userlist|}">
+	</td>
+  </tr>
+  <tr>
+	<td>&nbsp;</td>
+	<td><input type="radio" name="chg" onClick="CheckAllByName('form1', 'uidselect[]', true)">{|$lang.selectall|}
+	<input type="radio" name="chg"  onClick="CheckAllByName('form1', 'uidselect[]', false)">{|$lang.note30|}</td>
+  </tr>
+  <tr>
+	<td>&nbsp;</td>
+    <td>
+	<div style="color: red">{|$searchinfo|}</div>
+	{|foreach item=val from=$userinfo|}
+	{|$val|}
+	{|/foreach|}
+	</td>
+  </tr>
+
+    <tr> 
+    <td>{|$lang.event|}</td>
+    <td>
+	<select name="eid">
+		{|html_options options=$eventarray selected=$post.eid|}
+	</select>
+	</td>
+  </tr>
+    
+    <tr> 
+    <td>{|$lang.dkp|}{|$lang.value|}</td>
+    <td><input type="text" name="value" id="value" value="{|$post.value|}">{|$lang.note1|}</td>
+  </tr>
+    
+  <tr> 
+    <td colspan="2"><input type="submit" name="adddkp" value="{|$lang.add|}"></td>
+  </tr>
+  </form>
+</table>
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+</body>
+</html>

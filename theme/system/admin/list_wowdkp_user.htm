@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.user|}{|$lang.list|}</title>
+<script language="JavaScript">
+function CheckAllByName(formId, chkName, isChecked) {
+	var form = document.getElementById(formId);
+	for (var i=0; i<form.elements.length; i++) {
+		var c = form.elements[i];
+		if (c.name == chkName && c.type == 'checkbox'){
+			c.checked = isChecked;
+			continue;
+		} 
+	}
+}
+</script>
+
+
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+
+</head>
+
+<body>
+<table width="100%" border="0" cellspacing="0">
+  <form method="get" action="index.php">
+    <tr class="contitle"> 
+      <td colspan="9">{|$lang.user|}{|$lang.list|} 
+        <input type="hidden" name="module" value="admin" /> <input type="hidden" name="act" value="userlist" /> 
+        <select name="obj" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$classArr selected=$getval.obj|}
+		</select> 
+		<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'user');">
+		<input type="submit" value="GO">
+		</td>
+    </tr>
+  </form>
+  <tr class="navtext"> 
+    <td>{|$lang.num|}</td>
+    <td>{|$lang.name|}</td>
+    <td><a href="{|$baseurl|}&orderby=raceid">{|$lang.race|}</a></td>
+    <td><a href="{|$baseurl|}&orderby=workid">{|$lang.work|}</a></td>
+    <td><a href="{|$baseurl|}&orderby=level">{|$lang.level|}</a></td>
+    <td><a href="{|$baseurl|}&orderby=groupid">{|$lang.group|}</a></td>
+    <td><a href="{|$baseurl|}&orderby=stat">{|$lang.stat|}</a></td>
+    <td><a href="{|$baseurl|}&orderby=regtime">{|$lang.regtime|}</a></td>
+    <td>{|$lang.opertion|}</td>
+  </tr>
+  <form method="POST" action="index.php?module=admin&act=fulldelete" name="form1" id="form1">
+  {|foreach item=val from=$userdata|} 
+  <tr bgcolor="{|cycle values='#252525,#161616'|}"> 
+    <td>{|$val.id|}</td>
+    <td><input name='uidselect[]' type='checkbox' value="{|$val.id|}" class="input">{|$val.name|}</td>
+    <td>{|$val.raceid|}</td>
+    <td>{|$val.workid|}</td>
+    <td>{|$val.level|}</td>
+    <td>{|$val.groupid|}</td>
+    <td>{|if $val.stat=='1'|}<font color="green">{|$lang.start|}</font>{|else|}<font color="red">{|$lang.stop|}</font>{|/if|}</td>
+    <td>{|$val.regtime|}</td>
+    <td><!-- <a href="?module=admin&act=delete&obj=user&id={|$val.id|}" onclick="return confirmLink(this, 'delete the record?')">{|$lang.delete|}</a>--> 
+      <a href="?module=admin&act=modify&obj=user&id={|$val.id|}">{|$lang.modify|}</a> 
+      {|if $val.stat=='1'|} <a href="?module=admin&act=userstop&stat=0&&id={|$val.id|}">{|$lang.stop|}</a> 
+      {|else|} <a href="?module=admin&act=userstop&stat=1&&id={|$val.id|}">{|$lang.start|}</a> 
+      {|/if|} </td>
+  </tr>
+  {|/foreach|}
+  <tr> 
+    <td colspan="9">&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="radio" name="chg" onClick="CheckAllByName('form1', 'uidselect[]', true)">{|$lang.selectall|}
+	<input type="radio" name="chg"  onClick="CheckAllByName('form1', 'uidselect[]', false)">{|$lang.note30|}
+	<input type="hidden" name="obj" value="user" />
+	<input type="submit" name="submit" value="{|$lang.delete|}{|$lang.user|}" onclick="return confirmLink(this, 'delete the records?')">
+	</td>
+  </tr>
+  </form>
+  <tr> 
+    <td colspan="9">{|$pageText|} </td>
+  </tr>
+  <tr>
+    <td colspan="9"><a href="index.php?module=admin&act=DownloadUserInfo">DownloadUserInfo</a></td>
+  </tr>
+</table>
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+<br />
+<br />
+<br />
+<br />
+</body>
+</html>

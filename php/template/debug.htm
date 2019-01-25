@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<head>
+<title>Error</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="Content-Language" content="GB2312" />
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+<style type="text/css">
+body {ldelim}
+	margin-top:50px;
+{rdelim}
+.title {ldelim}
+    margin-left: auto;
+    margin-right: auto;
+    color: #FFF;
+    background-color: #00F;
+    width: 500px;
+    height: 28px;
+    font: bold 15px 宋体, sans-serif;
+    vertical-align: middle;
+    line-height: 28px;
+    border: 1px solid #000;
+    border-bottom: 0;
+{rdelim}
+ul {ldelim}
+    list-style-type: none;
+    margin: 2px;
+{rdelim}
+</style>
+</head>
+<body>
+<div class="title">info</div>
+<div style="margin-left: auto; margin-right: auto; height: 22px; width: 500px; font-size: 12px; line-height: 150%; border: 1px solid #000; border-top: 0;">
+<ul>
+<li>Description:{|$array.message|}</li>
+<li>File:{|$array.file|}</li>
+<li>Line:{|$array.line|}</li>
+<li>Time:{|$array.time|date_format:"%Y-%m-%d %H:%M:%S"|}</li>
+</ul>
+</div>
+</body>
+</html>

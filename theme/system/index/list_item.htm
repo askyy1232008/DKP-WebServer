@@ -1,0 +1,144 @@
+{|include file=header.htm|} 
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" height="80">
+<tbody>
+<form method="get" action="index.php">
+	<tr><td width="387">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td width="88">
+					<div style="position: relative;">
+					<div style="position: absolute; top: -41px; left: 29px;">
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons-top.gif" border="0" height="41" width="34">
+					</div>
+					</div>
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons.gif" border="0" height="51" width="88">
+				</td>
+				<td background="./theme/{|$theme|}/images/header-blank.gif" width="299">
+					<table border="0" cellpadding="0" cellspacing="0" width="299">
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<table border="0" cellpadding="0" cellspacing="0" width="299">
+								<tbody>
+									<tr>
+										<td colspan="2"><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="1" width="299"></td>
+									</tr>
+									<tr>
+										<td><span class="navtext">{|$lang.item|}{|$lang.list|}</span>
+										
+										</td>
+										<td><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="24" width="1"></td>
+									</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="2">
+								<input type="hidden" name="module" value="index" />
+								<input type="hidden" name="act" value="items" />
+								<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}" size="20" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'item');" />
+								<input type="submit" value="{|$lang.item|}{|$lang.search|}">
+							</td>
+						</tr>
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr><td colspan="2"></td></tr>		
+		</tbody>
+		
+		</table>
+		</td>
+		
+		<td align="right" valign="top" width="100%">	
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr><td colspan="4"></td>&nbsp;</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</tbody>
+		</table>
+		</td>
+	</tr>
+</form>
+</tbody>
+</table>
+
+<table width="100%" border="0" cellspacing="0">
+  <tr class="contitle">
+  	<th>{|$lang.num|}</th>
+  	<th>{|$lang.event|}</th>
+  	<th><a href="index.php?module=index&act=items&orderby=name">{|$lang.name|}</a></th>
+	<th>{|$lang.note23|}</th>
+  	<th>{|$lang.notes|}</th>
+  	<th><a href="index.php?module=index&act=items&orderby=stat">{|$lang.stat|}</a></th>
+	<th><a href="index.php?module=index&act=items&orderby=value">{|$lang.item|}{|$lang.dkp|}{|$lang.value|}</a></th>
+  </tr>
+
+  {|foreach item=val key=key from=$userdata|}
+  <tr bgcolor="{|cycle values="#252525,#161616"|}" class="navtext">
+			<td align="center">{|$val.id|}</td>
+			<td><a href="?module=index&act=viewraids&id={|$val.eid|}">{|$val.eventname|}</a></td>
+			<td>
+			<a class="tooltips" href="#tooltips" onMouseOver="ajaxRead('id={|$val.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$val.itemid|}', '{|$val.itemid|}', '{|$val.name|}')"> <font color="#{|$val.icolor|}">{|$val.name|}</font> <span id="dkper_tooltips_{|$key|}{|$val.itemid|}"></span></a>
+			</td>
+			<td>{|$val.num|}</td>
+			<td>{|$val.notes|truncate:30:"...":true|}</td>
+			<td align="center">{|if $val.stat=='1'|}{|$lang.dose|}{|else|}<font color="red">{|$lang.doesnot|}</font>{|/if|}</td>
+			<td align="center">{|$val.value|}</td>
+  </tr>
+  {|/foreach|}
+  <tr>
+    <td colspan="7">{|$pageText|}</td>
+  </tr>
+</table>
+{|$itemTips|}
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+{|include file=foot.htm|} 
+
+
+

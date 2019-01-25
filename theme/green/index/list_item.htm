@@ -1,0 +1,60 @@
+{|include file="header.htm"|}
+
+<table width="100%" border="0">
+<form method="get" action="index.php">	
+	<tr class="sectiontitle">
+		<td colspan="6">{|$lang.item|}{|$lang.list|}
+		<input type="hidden" name="module" value="index" />
+		<input type="hidden" name="act" value="items" />
+		<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}"  onkeyup="xajax_getInfo(document.getElementById('keyword').value,'item');" />
+		<input type="submit" value="{|$lang.item|}{|$lang.search|}">
+		</td>
+	</tr>
+</form>
+
+  <tr class="contenttitle">
+  	<th>{|$lang.num|}</th>
+  	<th>{|$lang.event|}</th>
+  	<th><a href="index.php?module=index&act=items&orderby=name">{|$lang.name|}</a></th>
+  	<th>{|$lang.notes|}</th>
+  	<th><a href="index.php?module=index&act=items&orderby=stat">{|$lang.stat|}</a></th>
+	<th><a href="index.php?module=index&act=items&orderby=value">{|$lang.item|}{|$lang.dkp|}{|$lang.value|}</a></th>
+  </tr>
+
+  {|foreach item=val key=key from=$userdata|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+			<td align="center">{|$val.id|}</td>
+			<td>{|$val.eventname|}</td>
+			<td>
+				<a class="tooltips" href="#tooltips" onMouseOver="ajaxRead('id={|$val.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$val.itemid|}', {|$val.itemid|}, '{|$val.name|}')"> <font color="#{|$val.icolor|}">{|$val.name|}</font> <span id="dkper_tooltips_{|$key|}{|$val.itemid|}"></span></a>
+			</td>
+			<td>{|$val.notes|truncate:30:"...":true|}</td>
+			<td align="center">{|if $val.stat=='1'|}{|$lang.dose|}{|else|}{|$lang.doesnot|}{|/if|}</td>
+			<td align="center">{|$val.value|}</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="6">{|$pageText|}</td>
+  </tr>
+</table>
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+{|include file="foot.htm"|}

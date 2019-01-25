@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<title></title>
+</head>
+
+<body>
+<form name="form1" method="post" action="?module=admin&act=ShowRaidLog">
+  <table width="100%" border="0">
+    <tr> 
+      <td colspan="2" class="title">{|$lang.raidlog|}</td>
+    </tr>
+    <tr> 
+      <td width="15%">{|$lang.pleaselect|}{|$lang.copy|} </td>
+      <td width="79%"><select name="cid">
+		{|html_options options=$copyarray selected=1|}
+	    </select></td>
+    </tr>
+	<tr> 
+      <td>{|$lang.pleaselect|}{|$lang.group|} </td>
+      <td><select name="groupid">
+		{|html_options options=$groupArray|}
+	    </select></td>
+    </tr>
+    <tr> 
+      <td>{|$lang.event|}{|$lang.type|}: </td>
+      <td><select name="etid">
+			{|html_options options=$eventtype|}
+		</select></td>
+    </tr>
+	<tr> 
+      <td>{|$lang.note39|}: </td>
+      <td><select name="mode">
+			{|html_options options=$mode selected=$cookiectmode|}
+		</select></td>
+    </tr>
+    <tr> 
+      <td>{|$lang.event|}{|$lang.time|}: </td>
+      <td><input type="text" name="raidtime" value="{|$defRaidTime|}"></td>
+    </tr>
+    <tr> 
+      <td>{|$lang.raidlog|}: </td>
+      <td><textarea name="raidlog" cols="70" rows="20"></textarea></td>
+    </tr>
+    <tr> 
+      <td>&nbsp;</td>
+      <td><input type="submit" name="Submit"></td>
+    </tr>
+  </table>
+</form>
+<br />
+<br />
+<br />
+<br />
+<br />
+</body>
+</html>

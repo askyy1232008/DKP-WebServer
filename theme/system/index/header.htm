@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/css.css" rel="stylesheet" type="text/css">
+<title>{|$pagetitle|}</title>
+<link rel="stylesheet" type="text/css" href="./script/general.css" />
+</head>
+
+<body leftmargin="0" rightmargin="0" topmargin="0" bottommargin="0" bgcolor="#ffffff" link="#1a3550" marginheight="0" marginwidth="0" text="#403020" vlink="#403020">
+
+<script type="text/javascript">
+<!--
+function ajaxRead(file, itemobj, itemid, itemname){
+	var xmlObj = null;
+	if(window.XMLHttpRequest){
+		xmlObj = new XMLHttpRequest();
+	} else if(window.ActiveXObject){
+		xmlObj = new ActiveXObject("Microsoft.XMLHTTP");
+	} else {
+		return;
+	}
+	if (!itemid && !itemname)
+	{
+		return false;
+	}
+	file	= './getItem.php?' + file + '&iname=' + encodeURI(itemname)
+	xmlObj.onreadystatechange = function(){
+		if(xmlObj.readyState == 4){
+			updateObj(itemobj, xmlObj.responseText);
+		}
+	}
+	xmlObj.open ('GET', file, true);
+	xmlObj.send ('');
+}
+
+function updateObj(obj, data){
+	document.getElementById(obj).innerHTML = data;
+}
+-->
+</script>
+
+<map name="blizzlogo_Map"><area shape="rect" href="http://www.dkper.com/" alt="dkper.com" coords="6,49,74,84"></map>
+<map name="wowlogo_Map"><area shape="poly" href="http://www.dkper.com/" alt="wowdkper" coords="145,77, 162,52, 167,49, 170,41, 177,34, 204,34, 212,19, 208,15, 209,11, 275,11, 289,6, 305,6, 320,12, 383,12, 376,19, 385,31, 386,36, 403,33, 413,35, 415,40, 421,42, 422,49, 435,60, 442,78, 432,103, 418,112, 168,112, 158,102"></map>
+
+<!---headers/links--->
+
+<div style="position: absolute; width: 100%; top: 0px;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+	<tr><td colspan="3"><img src="./theme/{|$theme|}/images/pixel.gif" height="8" width="1"></td></tr>
+	<tr>
+		<td><img src="./theme/{|$theme|}/images/pixel.gif" height="1" width="240"></td>
+		<td align="center"><a href="http://www.eryuhaian.com/"><img src="./theme/{|$theme|}/images/dkplogo.png" border="0" height="108" width="262"></a></td>
+		<td><img src="./theme/{|$theme|}/images/pixel.gif" height="1" width="247"></td>
+	</tr>
+</tbody>
+</table>
+</div>
+
+<table bgcolor="#3f403f" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+	<tr><td background="./theme/{|$theme|}/images/gold-bg.gif">	
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tbody>
+		<tr>
+			<td background="./theme/{|$theme|}/images/topbg-left.gif">
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody>
+				<tr><td width="68"><img src="./theme/{|$theme|}/images/gryph-left.gif" height="80" width="68"></td>
+					<td align="right" valign="bottom"><img src="./theme/{|$theme|}/images/wowlogo-left.gif" height="65" width="291"></td>
+				</tr>
+				</tbody>
+			</table>			
+			</td>
+			
+			<td background="./theme/{|$theme|}/images/topbg-right.gif">			
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tbody>
+				<tr><td align="left" valign="bottom"><img src="./theme/{|$theme|}/images/wowlogo-right.gif" height="65" width="291"></td>
+				<td width="68"><img src="./theme/{|$theme|}/images/gryph-right.gif" height="80" width="68"></td>
+				</tr>
+				</tbody>
+			</table>
+			</td>
+
+		</tr>
+		</tbody>
+		</table>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<center>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody>
+	<tr>
+		<td>
+			<table background="./theme/{|$theme|}/images/gold-border.gif" border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tbody>
+				<tr>
+					<td><img src="./theme/{|$theme|}/images/left-finger.gif" height="19" width="97"></td>
+					<td align="right"><img src="./theme/{|$theme|}/images/right-finger.gif" height="19" width="97"></td>
+				</tr>
+			</tbody>
+			</table>
+		
+			<table background="./theme/{|$theme|}/images/linksbar-bg.gif" border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tbody>
+				<tr>
+					<td width="88"><img src="./theme/{|$theme|}/images/linksbar-left.gif" border="0" height="53" width="106"></td>
+					<td align="center" width="100%">
+						<table border="0" cellpadding="0" cellspacing="0" width="600">
+						<tbody>
+						<form method="get" action="index.php">
+							<tr><td colspan="3"><img src="./theme/{|$theme|}/images/pixel.gif" height="16" width="600"></td></tr>
+							<tr>
+								<td><img src="./theme/{|$theme|}/images/pixel.gif" height="37" width="1"></td>
+								<td align="center" valign="top"><span class="navtext">
+                                <a href="http://www.eryuhaian.com/">官方网站</a> 
+                |
+									<a href="?module=index&act=news">{|$lang.news|}</a> 
+                | <a href="?module=index&act=standings">{|$lang.user|}</a> 
+				| <a href="?module=index&act=viewall">{|$lang.viewall|}</a> 
+                | <a href="?module=index&act=events">{|$lang.event|}</a>
+				| <a href="?module=index&act=items">{|$lang.item|}</a> 
+                | <a href="?module=index&act=itemdis">{|$lang.items|}{|$lang.dis|}</a> 
+				| <a href="?module=index&act=list&obj=actionlist">{|$lang.action|}</a>
+				| <a href="?module=admin">管理员登陆</a> &nbsp;
+				<input type="hidden" name="module" value="index" />
+				<input type="hidden" name="act" value="setlang" />
+				<select name="lang" class="input" onchange="javascript:form.submit();">
+				{|html_options options=$langArr selected=$smarty.cookies.wow_cfg_lang|}
+				</select>&nbsp;
+
+				{|if $islogin=='1'|}
+				{|if $smarty.session.member.uid|}
+				<a href="index.php?module=index&act=viewmember&id={|$smarty.session.member.uid|}">{|$lang.user|}{|$lang.hall|}</a> | 
+				<a href="index.php?module=login&act=logout">{|$lang.logout|}</a>
+				{|else|}
+				<a href="index.php?module=index&act=registe">会员注册</a> | 
+				<a href="index.php?module=index&act=showlogin">会员登录</a>
+				{|/if|}
+				{|/if|}
+								</span></td>
+								<td><img src="./theme/{|$theme|}/images/pixel.gif" height="37" width="1"></td>
+							</tr>
+						</tbody>
+						</form>
+						</table>
+					</td>
+					<td valign="top" width="88"><img src="./theme/{|$theme|}/images/linksbar-right.gif" height="53" width="106"></td>
+				</tr>
+			</tbody>
+			</table>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.dkp|}{|$lang.dis|}</title>
+
+<script language="JavaScript">
+function setraiddkp(typename,op){
+	offsetdkp		= document.getElementById('setoffset').value;
+	//alert(5+5);
+	j		= 0;
+	for (i = 0; i < window.document.form1.length; i++) {
+		ename	= typename+j;
+		if (ename==window.document.form1.elements[i].id){
+			peruiddkp	= document.getElementById(ename).value;
+			if (op == '+'){
+				total		= parseFloat(peruiddkp) + parseFloat(offsetdkp);
+			}else{
+				total		= parseFloat(peruiddkp) - parseFloat(offsetdkp);
+			}
+			window.document.form1.elements[i].value = total;
+			j++;
+		}
+		//alert(ename);
+	}	
+}
+
+</script>
+
+</head>
+
+<body>
+<table width="100%" border="0">
+  <tr class="title"> 
+    <td colspan="2">{|$lang.note2|}</td>
+  </tr>
+<form method="get" action="index.php" name="selectevent">
+    <tr> 
+    <td>{|$lang.event|}
+    <input type="hidden" name="module" value="admin" />
+	<input type="hidden" name="act" value="dkpeventdisform" />
+    </td>
+    <td>
+	<select name="eid"  class="input" onchange="javascript:form.submit();">
+		<option value="0">{|$lang.pleaselect|}{|$lang.event|}</option>
+		{|html_options options=$eventarray selected=$eid|}
+	</select>
+	&nbsp;&nbsp;{|$lang.dis|}{|$lang.user|}:{|$usercount|}
+	</td>
+  </tr>
+  <tr><td>{|$lang.note32|}</td><td><input type="button" name="deductdkp" value=" - " onclick="setraiddkp('udkpid','-')" /><input type="button" name="adddkp" value=" + " onclick="setraiddkp('udkpid','+')" /> <input type="text" value="1" name="setoffset" size="5" id="setoffset"></td></tr>
+</form>
+
+  <form action="?module=admin&act={|$act|}" name="form1" method="post"> 
+  <tr> 
+    <td>{|$lang.event|}{|$lang.user|}<input type="hidden" name="eid" value="{|$eid|}" /></td>
+    <td>
+    <table width="60%">
+    <tr><td>{|$lang.user|}</td><td>{|$lang.dis|}{|$lang.dkp|}</td><td>{|$lang.dis|}{|$lang.time|}</td></tr>
+    {|foreach item=val key=key from=$eventuser|}
+    <tr>
+    	<td><font color="{|$val.wcolor|}">[{|$val.class|}]  {|$val.name|}</font></td>
+    	<td>
+    		<input type="text" name="udkp[{|$val.id|}]" id="udkpid{|$key|}" value="{|$val.value|}">
+    		<input type="hidden" name="uid[]" value="{|$val.uid|}">
+    	</td>
+    	<td>{|$val.distime|}</td></tr>
+    {|/foreach|}
+    </table>
+    </td>
+  </tr>
+    
+  <tr>
+  	<td>&nbsp;</td>
+    <td><input type="submit" name="adddkp" value="{|$lang.modify|}{|$lang.dkp|}"></td>
+  </tr>
+  </form>
+</table>
+</body>
+</html>
+<!--0.071579s-->

@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<title>{|$lang.dkp|}{|$lang.unite|}</title>
+</head>
+
+<body>
+<table width="100%" border="0">
+	<tr>
+		<td class="sectiontitle">{|$lang.dkp|}{|$lang.unite|}
+		</td>
+	</tr>
+</table>
+
+<table width="100%" border="0">
+<form method="POST" action="index.php?module=admin&act=list&obj=dkpunite">
+  <tr>
+    <td height="50">&nbsp;</td>
+  </tr>
+  <tr>
+    <td><div align="center">{|$lang.note53|}
+    <select name="fromcid">
+		{|html_options options=$copyarray selected=$postval.fromcid|}
+	</select>
+	<select name="operator">
+          <option value="1">+</option>
+          <option value="2">-</option>
+          <option value="3">*</option>
+          <option value="4">/</option>
+    </select>
+	<input name="dkpvalue" type="text" id="dkpvalue" size="10" value="0.00" />
+	{|$lang.dkp|}
+    {|$lang.note54|}
+    <select name="tocid">
+		{|html_options options=$copyarray selected=$postval.tocid|}
+	</select>
+    </div></td>
+  </tr>
+  <tr>
+    <td><div align="center">
+      <input type="submit" name="dkpunite" value=" GO " />
+    </div></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>{|$disresult|}</td>
+  </tr>
+</form>
+</table>
+
+</body>
+
+</html>

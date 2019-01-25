@@ -1,0 +1,148 @@
+{|include file="header.htm"|}
+
+{|if $smarty.session.member.uid and $smarty.session.member.uid==$getval.id|}
+<table border="0" cellpadding="0" cellspacing="0">
+<tr class="sectiontitle">
+<td>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?module=index&act=viewmember&id={|$smarty.session.member.uid|}">{|$lang.all|}{|$lang.info|}</a> &nbsp;
+<a href="index.php?module=index&act=modifymeminfo">{|$lang.modify|}{|$lang.info|}</a>
+&nbsp;
+<a href="index.php?module=index&act=list&obj=actionlist">{|$lang.action|}{|$lang.signup|}</a>
+</td>
+</tr>
+</table>
+{|else|}
+<br />
+{|/if|}
+
+<table width="100%" border="0">
+<form method=post action="?module=index&act=updateMember">
+  <tr>
+    <td width="10%">
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	{|if $userdata.pic|}
+		<img style="filter : progid:DXImageTransform.Microsoft.Glow(color=#70472A,Strength=8" width="70" height="80" border="0" src="img/{|$userdata.pic|}">
+	{|elseif $headInfo|}
+		<img style="filter : progid:DXImageTransform.Microsoft.Glow(color=#70472A,Strength=8" width="70" height="70" border="0" src="cache/member/{|$headInfo|}.gif">
+	{|/if|}
+	</td>
+	<td width="2%">&nbsp;</td>
+	<td>
+		<span class="navtext">{|$userdata.member|}</span>
+		<input type="hidden" name="memberName" value="{|$userdata.member|}">
+		<input type="submit" value="{|$lang.updateInfo|}">
+		<br />
+		{|$character.realm|}&nbsp;{|$lang.level|}{|$character.level|} {|$userdata.race|} {|$userdata.class|} {|$userdata.gname|}
+	</td>
+	<td>
+	{|foreach item=val key=key from=$itemsets|}
+	<a class="tooltips" href="#tooltips" onMouseOver="ajaxRead('id={|$val.id|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$key|}{|$val.id|}', {|$val.id|}, '{|$val.name|}')"><img src="./images/icons/51x51/{|$val.icon|}.jpg" width="30" height="30" border="0" alt="{|$val.id|}"><span id="dkper_tooltips_{|$key|}{|$key|}{|$val.id|}"></span></a>
+	{|/foreach|}
+	&nbsp;
+	</td>
+  </tr>
+  </form>
+  <tr>
+    <td><b>{|$lang.current|}{|$lang.dkp|}</b>: <span class="maintitle red">{|$userdata.dkpvalue|}</span></td>
+	<td colspan="3">{|if $character.health != ''|}{|$lang.professions|} : {|foreach item=val from=$professions|}{|$val.name|}{|$val.value|}/{|$val.max|}&nbsp;&nbsp;{|/foreach|}
+	PVP:{|$lang.lifetimehonorablekills|} {|$character.lifetimehonorablekills|}  {|$lang.arenacurrency|}{|$character.arenacurrency|}&nbsp;&nbsp;
+	{|$lang.health|} {|$character.health|}  {|$lang.secondBar|} {|$character.secondBar|}  &nbsp;&nbsp;
+	{|$lang.talentSpec|}:{|$character.talentSpec|} &nbsp;&nbsp;
+	{|$lang.last|}{|$lang.time|}:{|$character.lastModified|}{|/if|}
+	</td>
+  </tr>
+  <tr>
+    <td colspan="4"><b>{|$lang.regtime|}</b>: {|$userdata.regtime|}</td>
+  </tr>
+  <tr>
+    <td colspan="4">
+	{|if $showactioninfo > 0|}
+		<b class='red'>{|$lang.note49|}</b>:
+		{|foreach item=val from=$actioninfo|}
+		<a href="index.php?module=index&act=list&obj=showsignup&id={|$val.id|}">{|$val.name|}</a>&nbsp;&nbsp;
+		{|/foreach|}
+	{|/if|}
+	</td>
+  </tr>
+
+  <tr>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td colspan="4">
+	<form method="get" action="index.php">
+	<input type="hidden" name="module" value="index" />
+	<input type="hidden" name="act" value="viewmember" />
+	<input type="hidden" name="id" value="{|$getval.id|}" />
+	<select name="cid" class="input" onchange="javascript:form.submit();">
+	{|html_options options=$copyarray selected=$getval.cid|}
+	</select>
+	</form>	
+	</td>
+  </tr>
+
+  <tr class="sectiontitle">
+    <td colspan="4"><b>{|$lang.prize|}</b>: </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+	<table width="80%" border=0 cellspacing="1">
+		<tr class="contenttitle">
+			<th width="30%">{|$lang.item|}</th>
+			<th width="30%">{|$lang.event|}</th>
+			<th width="15%">{|$lang.dkp|}</th>
+			<th width="15%">{|$lang.time|}</th>
+		</tr>
+		{|foreach item=val key=key from=$itemarray|}
+		<tr class="{|cycle values="rowa,rowb"|}">
+			<td>
+				<a class="tooltips" href="#tooltips" onMouseOver="ajaxRead('id={|$val.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$val.itemid|}', {|$val.itemid|}, '{|$val.item|}')"> <font color=#{|$val.icolor|}>{|$val.item|}</font> <span id="dkper_tooltips_{|$key|}{|$val.itemid|}"></span></a>
+				</a>
+			</td>
+			<td align="left"><a href="?module=index&act=viewraids&id={|$val.eid|}">{|$val.ename|}</a></td>
+			<td align="center">{|$val.dkp|}</td>
+			<td align="center">{|$val.time|}</td>
+		</tr>
+		{|/foreach|}
+		<tr><td colspan="4" align="right">{|$itempagetext|}</td></tr>
+	</table>
+	</td>
+  </tr>
+
+  <tr>
+    <td colspan="4">&nbsp;</td>
+  </tr>
+  <tr class="sectiontitle">
+    <td colspan="4"><b>{|$lang.prostrate|}</b>: </td>
+  </tr>
+  <tr>
+    <td colspan="4">
+	<table width="80%" border=0 cellspacing="1">
+        <tr class="contenttitle"> 
+          <th>{|$lang.raid|}</th>
+          <th>{|$lang.dkp|}</th>
+          <th>{|$lang.time|}</th>
+          <th>{|$lang.notes|}</th>
+        </tr>
+        {|foreach item=val from=$prostratearray|} 
+        <tr class="{|cycle values="rowa,rowb"|}"> 
+          <td><a href="?module=index&act=viewraids&id={|$val.eid|}">{|$val.name|truncate:50:"...":true|}</a></td>
+          <td align="center">{|$val.value|}</td>
+          <td align="center">{|$val.raidtime|}</td>
+          <td align="center">{|$val.notes|truncate:50:"...":true|}</td>
+        </tr>
+        {|/foreach|} 
+        <tr> 
+          <td colspan="4" align="right">{|$prostpagetext|}</td>
+        </tr>
+      </table>
+	</td>
+  </tr>
+
+  <tr>
+    <td colspan="4" align="right" class="small">-={|$lang.sitetitle|}=-</td>
+  </tr>
+</table>
+{|$itemTips|}
+{|include file="foot.htm"|}

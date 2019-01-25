@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.item|}{|$lang.dis|}{|$lang.list|}</title>
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+
+<script type="text/javascript">
+<!--
+function ajaxRead(file, itemobj, itemid, itemname){
+	var xmlObj = null;
+	if(window.XMLHttpRequest){
+		xmlObj = new XMLHttpRequest();
+	} else if(window.ActiveXObject){
+		xmlObj = new ActiveXObject("Microsoft.XMLHTTP");
+	} else {
+		return;
+	}
+	if (!itemid && !itemname)
+	{
+		return false;
+	}
+	file	= './getItem.php?' + file + '&iname=' + encodeURI(itemname)
+	xmlObj.onreadystatechange = function(){
+		if(xmlObj.readyState == 4){
+			updateObj(itemobj, xmlObj.responseText);
+		}
+	}
+	xmlObj.open ('GET', file, true);
+	xmlObj.send ('');
+}
+
+function updateObj(obj, data){
+	document.getElementById(obj).innerHTML = data;
+}
+-->
+</script>
+
+<table width="100%" border="0">
+<form method="get" action="index.php">
+	<tr class="title">
+		<td colspan="7">{|$lang.item|}{|$lang.dis|}{|$lang.list|}
+		<input type="hidden" name="module" value="admin" />
+		<input type="hidden" name="act" value="itemdislist" />
+		<select name="obj" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$classArr selected=$getval.obj|}
+		</select>
+		<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'user');">
+		<input type="submit" value="GO">
+		</td>
+	</tr>
+</form>
+
+  <tr class="navtext">
+  	<td>{|$lang.num|}</td>
+  	<td>{|$lang.item|}{|$lang.name|}</td>
+  	<td>{|$lang.user|}{|$lang.name|}</td>
+  	<td>{|$lang.event|truncate:20:"...":true|}</td>
+  	<td>{|$lang.item|}{|$lang.dkp|}{|$lang.value|}</td>
+	<td>{|$lang.dis|}{|$lang.time|}</td>
+    <td>{|$lang.opertion|}</td>
+  </tr>
+
+  {|foreach item=val key=key from=$userdata|}
+  <tr  class="{|cycle values="rowa,rowb"|}">
+			<td>{|$val.id|}</td>
+			<td>
+				{|if $val.icolor<>''|}
+					<a class="tooltips" href="#tooltips" onMouseOver="ajaxRead('id={|$val.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$val.itemid|}', {|$val.itemid|}, '{|$val.iid|}')"> <font color="#{|$val.icolor|}">{|$val.iid|}</font> <span id="dkper_tooltips_{|$key|}{|$val.itemid|}"></span></a>
+				{|else|}
+					<a class="tooltips" href="#tooltips" onMouseOver="ajaxRead('id={|$val.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$val.itemid|}', {|$val.itemid|}, '{|$val.iid|}')">{|$val.iid|}<span id="dkper_tooltips_{|$key|}{|$val.itemid|}"></span></a>
+				{|/if|}
+			</td>
+			<td>{|$val.uid|}</td>
+			<td>{|$val.eid|}</td>
+			<td>{|$val.value|}</td>
+			<td>{|$val.distime|}</td>
+		<td>
+		<a href="?module=admin&act=delete&obj=itemdis&id={|$val.id|}">{|$lang.cancle|}</a> 
+		<a href="?module=admin&act=modify&obj=dkpdis&id={|$val.id|}">{|$lang.reallot|}</a> 
+		</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="7">{|$pageText|}</td>
+  </tr>
+</table>
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+</body>
+</html>
+<!--0.083480s-->

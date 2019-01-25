@@ -1,0 +1,225 @@
+body {
+	color:#000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif; 	
+	background-image: url(images/lines.gif);
+	margin: 0px;
+	font-size: 12px; 
+}
+.maintitle { color: #FFB019; font-weight: bold; font-size: 14pt;}
+td {
+	font-size: 12px; 
+}
+.title {
+	padding: 5px;
+	border-left: solid 1px #006400;
+	border-right:solid 1px #006400;
+	border-bottom:solid 1px #006400;
+	border-top:solid 1px #006400;
+	margin: 5px;
+}
+a:link,a:active,a:visited { 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 12px; 
+	text-decoration: none; 
+	color: #006400; 
+	font-style: normal;
+}
+a:hover { 
+	font-family: Verdana, Arial, Helvetica, sans-serif; 
+	font-size: 12px; color: #000000; 
+	font-style: normal
+}
+.sectiontitle {
+	color: #000000;
+	font-weight: bold;
+	font-size: 12px;
+	text-align: left;	
+	background-image: url(images/lines.gif);
+	border: solid 1px #006400; 
+	height: 25px;
+	vertical-align: middle;	
+}
+.contenttitle {
+	color: #006400; 
+	font-size: 12px; 
+	font-weight : bold;
+	background: #daf5da;
+	height: 20px;
+	text-align: center;
+	padding-top: 7px;
+	padding-left: 10px;	
+}
+.rowa {
+	background-color: #eeeeee; 
+	font-size: 12px; 
+}
+.rowb {
+	background-color: #cccccc; 
+	font-size: 12px; 
+}
+
+select {
+	color : #000000;
+	font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+	border-color : #006400; 
+}
+input { 
+	background-color : #ecfff0; 
+	color : #000000;
+	font-size: 12px; font-family: Verdana, Arial, Helvetica, sans-serif;  
+}
+
+textarea {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+}
+
+
+
+#ai-container {
+  display             : none;
+  position            : absolute;
+}
+.ai dl.box {
+  padding             : 5px;
+  float               : left;
+  border              : 1px solid #999999;
+  /*background-color    : #000000;*/
+  background-image: url('./images/blue-bg.png');
+  font-family         : Lucida Sans Unicode, Lucida Grande, sans-serif;
+  font-size           : 12px;
+  line-height         : 1.5em;
+  color               : #ffffff;
+}
+.ai dl.box {
+  width               : 20em;
+  margin: 0;
+}
+/****** ITEM TITLE ****************************************************/
+.ai dl.box dt.title {
+  margin              : 0 0 0.2em 0;
+  font-weight         : bold;
+  font-size           : 1.2em;
+}
+/****** ITEM TITLE COLORs AND AI LINK COLORS **************************/
+.ai dl.box dt.poor, .ai-poor {
+  color               : #808080;
+}
+.ai dl.box dt.common, .ai-common {
+  color               : #808080;
+}
+.ai dl.box dt.uncommon, .ai-uncommon {
+  color               : #00c400;
+}
+.ai dl.box dt.rare, .ai-rare {
+  color               : #0070dd;
+}
+.ai dl.box dt.epic, .ai-epic {
+  color               : #963cf1;
+}
+.ai dl.box dt.legendary, .ai-legendary {
+  color               : #ffa500;
+}
+.ai dl.box dt.artifact, .ai-artifact {
+  color               : #ff0000;
+}
+/****** ITEM ICON *****************************************************/
+.ai img {
+  width               : 64px;
+  height              : 64px;
+  float               : left;
+  position            : relative;
+  left                : 1px;
+}
+.ai-no-icon img {
+  display             : none;
+}
+/****** ALL DDs *******************************************************/
+.ai dl.box dd {
+  margin              : 0;
+}
+/****** ALL RIGHT DDs *************************************************/
+.ai dl.box dd.right {
+  width               : 6em;
+  position            : relative;
+  float               : right;
+  top                 : -1.5em;
+  text-align          : right;
+}
+/****** DTs OF ATTRIBUTES AND SOCKETS *********************************/
+.ai dl.box dd.attributes dl dt, .ai dl.box dd.sockets dl dt {
+  display             : none;
+}
+/****** SOCKET LIST ***************************************************/
+.ai dl.box dd.sockets {
+  color               : #aaaaaa;
+}
+/****** ICONS FOR SOCKET LIST *****************************************/
+.ai dl.box dd.sockets dl dd {
+  padding-left        : 18px;
+  background-position : left center;
+  background-repeat   : no-repeat;
+}
+.ai dl.box dd.sockets dl dd.no_icon {
+  padding-left        : 0;
+}
+.ai dl.box dd.sockets dl dd.yellow {
+  background-image    : url(./images/Socket_Yellow.png);
+}
+.ai dl.box dd.sockets dl dd.red {
+  background-image    : url(./images/Socket_Red.png);
+}
+.ai dl.box dd.sockets dl dd.blue {
+  background-image    : url(./images/Socket_Blue.png);
+}
+.ai dl.box dd.sockets dl dd.meta {
+  background-image    : url(./images/Socket_Meta.png);
+}
+/****** EQUIP LIST ****************************************************/
+.ai dl.box dd.spells ul {
+  margin              : 0;
+  padding             : 0;
+  list-style-type     : none;
+  color               : #1eff00;
+}
+/****** SET ***********************************************************/
+.ai dl.box dd.set {
+  color               : #ffd200;
+}
+/****** AI LINK *******************************************************/
+.ai-link {
+  font-weight         : bold;
+  text-decoration     : none;
+}
+.ai {
+	text-decoration: none;
+}
+/*Tooltips*/
+.tooltips{
+position:relative; /*这个是关键*/
+z-index:2;
+text-decoration: none;
+}
+.tooltips:hover{
+z-index:3;
+background:none; /*没有这个在IE中不可用*/
+}
+.tooltips span{
+display: none;
+text-decoration: none;
+}
+.tooltips:hover span{ /*span 标签仅在 :hover 状态时显示*/
+display:block;
+position:absolute;
+top:21px;
+left:9px;
+width:30em;
+/*
+border:1px solid black;
+#background-image:url('ai/scripts/blue-bg.png');
+*/
+padding: 3px;
+/*
+color:black;
+*/
+}

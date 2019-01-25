@@ -1,0 +1,166 @@
+{|include file=header.htm|} 
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+
+<div id="dhtmltooltip"></div>
+<script src="./script/tooltips.js" language="javascript"></script>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" height="80">
+<tbody>
+<form method="get" action="index.php">
+	<tr><td width="387">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td width="88">
+					<div style="position: relative;">
+					<div style="position: absolute; top: -41px; left: 29px;">
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons-top.gif" border="0" height="41" width="34">
+					</div>
+					</div>
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons.gif" border="0" height="51" width="88">
+				</td>
+				<td background="./theme/{|$theme|}/images/header-blank.gif" width="299">
+					<table border="0" cellpadding="0" cellspacing="0" width="299">
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<table border="0" cellpadding="0" cellspacing="0" width="299">
+								<tbody>
+									<tr>
+										<td colspan="2"><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="1" width="299"></td>
+									</tr>
+									<tr>
+										<td><span class="navtext">{|$lang.user|}{|$lang.dkp|}{|$lang.list|}</span>
+										</td>
+										<td><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="24" width="1"></td>
+									</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="2">
+								<input type="hidden" name="module" value="index" />
+								<input type="hidden" name="act" value="standings" />
+								<select name="obj" class="input" onchange="javascript:form.submit();">
+								{|html_options options=$classArr selected=$getval.obj|}
+								</select>
+								<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}" size="10" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'user');" />
+								<input type="submit" value="{|$lang.search|}">
+							</td>
+						</tr>
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr><td colspan="2">&nbsp;</td></tr>		
+		</tbody>
+		
+		</table>
+		</td>
+		
+		<td align="right" valign="top" width="100%">	
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr><td colspan="4"></td>&nbsp;</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><span class="navtext">{|$lang.copy|}</span></td>
+				<td></td>
+				<td><span>
+					<select name="cid" class="input" onchange="javascript:form.submit();">	
+					{|html_options options=$copyarray selected=$getval.cid|}			
+					</select>{|$lang.group|}
+		<select name="groupid" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$groupArray selected=$getval.groupid|}
+		</select></span>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+		</td>
+	</tr>
+</form>
+</tbody>
+</table>
+
+<table width="100%" border="0" cellspacing="0">
+		  <tr class="contitle">
+			<th><a href="{|$baseurl|}&orderby=id">{|$lang.user|}</a></th>
+			<th><a href="{|$baseurl|}&orderby=name">{|$lang.user|}{|$lang.name|}</a></th>
+			<th><a href="{|$baseurl|}&orderby=workname">{|$lang.work|}</a></th>
+			<th><a href="{|$baseurl|}&orderby=racename">{|$lang.race|}</a></th>
+			<th><a href="{|$baseurl|}&orderby=level">{|$lang.level|}</a></th>
+			<th><a href="{|$baseurl|}&orderby=groupname">{|$lang.group|}</a></th>
+			<th>{|$lang.earn|}</th>
+			<th>{|$lang.spent|}</th>
+			<th><a href="{|$baseurl|}&orderby=rnum">{|$lang.attendance|}{|$lang.times|}</a></th>
+			<th><a href="{|$baseurl|}&orderby=raidnum">{|$lang.attendance|}</a></th>
+			<th><a href="{|$baseurl|}&orderby=dkpvalue">{|$lang.current|}{|$lang.dkp|}{|$lang.value|}</a></th>
+			<th><a href="{|$baseurl|}&orderby=lastraidtime">{|$lang.last|}{|$lang.attendance|}</a></th>
+		  </tr>
+		  {|foreach item=val from=$userdata|}
+		  <tr bgcolor="{|cycle values="#252525,#161616"|}">
+					<td align="center">{|$val.id|}</td>
+					<td><img src="././theme/{|$theme|}/images/rank/rank{|$val.rank|}.gif" border="0" alt="rank{|$val.rank|}"> 
+					<a href="?module=index&act=viewmember&id={|$val.id|}" target="_blank" title="rank{|$val.rank|}">{|$val.name|}</a>
+					</td>
+					<td><font color="#{|$val.wcolor|}">{|$val.workname|}</font></td>
+					<td>{|$val.racename|}</td>
+					<td align="center">{|$val.level|}</td>
+					<td>{|$val.groupname|}</td>
+					<td align="center"><font color="green">{|$val.earn|}</font></td>
+					<td align="center"><font color="red">{|$val.spent|}</font></td>
+					<td align="center">{|$val.rnum|}/{|$raidtotal|}</td>
+					<td align="center"><font color="green">{|$val.raidnum|string_format:"%.2f"|}%</font></td>
+					<td align="center">
+					{|if ($val.dkpvalue < 0)|}
+						<b><font color="red">{|$val.dkpvalue|}</font></b>
+					{|else|}
+						<b><font color="green">{|$val.dkpvalue|}</font></b>
+					{|/if|}
+					</td>
+					<td align="center">{|$val.lastraidtime|}</td>
+					</td>
+		  </tr>
+		  {|/foreach|}
+		  <tr>
+			<td colspan="12">{|$pageText|}</td>
+		  </tr>
+		</table>
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+{|include file=foot.htm|} 

@@ -1,0 +1,69 @@
+{|include file="header.htm"|}
+
+<br />
+<div align="center">
+<table width="50%"  height="130">
+  <tr>
+    <td width="270"> 
+      <table width="250">
+        <tr> 
+          <td colspan="2" height="21">&nbsp;</td>
+        </tr>
+        <tr valign="middle"> 
+          <td colspan="2" align="center"> <font style="font-size: 18px;"><b>{|$lang.sitetitle|}{|$lang.user|}{|$lang.login|}</b> 
+            <hr width="95%" align="center">
+          </td>
+        </tr>
+        <tr> 
+          <td width="82" height="32"> 
+            <div align="center"></div>
+          </td>
+          <td width="168" height="32"> 
+            <div align="center"><a href="index.php">{|$lang.sitetitle|}</a></div>
+          </td>
+        </tr>
+      </table>
+    </td>
+    <td width="340">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" height="150">
+        <tr>
+          <td height="30"> {|$lang.pleaseinput|}{|$lang.user|}{|$lang.info|}</td>
+        </tr>
+        <tr>
+          <td>
+            <table width="90%" border="0" cellspacing="0" cellpadding="0" align="center" height="96">
+			<form action="index.php?module=login&act=Memlogin" method="post" name="loginForm" id="loginForm">
+              <tr> 
+                <td height="37" width="31%"> 
+                  <div align="center" class="navtext">{|$lang.user|}:</div>
+                </td>
+                <td height="37" width="69%"> 
+                    <input type="text" name="username">
+                </td>
+              </tr>
+              <tr> 
+                <td width="31%" height="27"> 
+                  <div align="center" class="navtext">{|$lang.password|}:</div>
+                </td>
+                <td width="69%" height="27"> 
+                    <input type="password" name="password">
+					<input type="hidden" name="jumpurl" value="{|$jumpurl|}">
+                </td>
+              </tr>
+              <tr> 
+                <td width="31%">&nbsp;</td>
+                <td width="69%"> 
+                  <input type="submit" name="Submit" value=" {|$lang.login|} ">
+                </td>
+              </tr>
+			  </form>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</div>
+
+{|include file="foot.htm"|}

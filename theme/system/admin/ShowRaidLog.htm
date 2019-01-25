@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<title></title>
+<script language="JavaScript">
+function setraiddkp(typename,dkpvalue){
+	ename	= typename+'[]';
+	j		= 0;
+	tl		= document.getElementById('istimeline').checked;
+	
+	for (i = 0; i < window.document.raidlog.length; i++) {
+		if (ename==window.document.raidlog.elements[i].name){
+			peruiddkp	= document.getElementById('aj_uiddkp'+j).value;
+			//alert(peruiddkp);
+			if (tl == true)
+				window.document.raidlog.elements[i].value = dkpvalue*peruiddkp/100;
+			else 
+				window.document.raidlog.elements[i].value = dkpvalue;
+			j++;
+		}
+	}	
+}
+
+function setTimeLine(typename){
+	disdkp	= document.getElementById('raiddkp').value;
+	setraiddkp(typename,disdkp);
+}
+
+function setalldkp(dkpvalue){
+	setraiddkp('aj_dkp',dkpvalue);
+	setraiddkp('lv_dkp',dkpvalue);
+}
+function validate(theform) {
+theform.xmlsubmit.disabled = true;
+return true;
+}
+</script>
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<div id="dhtmltooltip"></div>
+<script src="./script/tooltips.js" language="javascript"></script>
+
+<table width="100%" border="0" bgcolor="#AAAAAA">
+<form method=post name="raidlog" action="index.php?module=admin&act=RecordDkpByLog" onSubmit="return validate(this)">
+  <tr class="title"> 
+    <td>{|$lang.raidlog|}</td>
+  </tr>
+  <tr> 
+    <td>{|$lang.event|}{|$lang.name|}:
+	<input type="text" name="name" value="[{|$startDate|}]{|$zone|}" size="50">{|$startDate|}&nbsp;&nbsp;{|$startHours|}-{|$endHours|}&nbsp;&nbsp;<font color="green">{|$lang.total|}:{|$totalTime|}  {|$lang.minute|}</font>
+	<br />
+	{|$lang.event|}{|$lang.notes|}:
+	<input type="text" name="notes" value="{|$notes|}" size="50">
+	<input type="hidden" name="etid" value="{|$etid|}">
+	<input type="hidden" name="cid" value="{|$cid|}">
+	<input type="hidden" name="raidtime" value="{|$startDate|}">
+	{|if $smarty.cookies.wow_cfg_istimeline == 'on'|}
+		<input name="istimeline" id="istimeline" type="checkbox" checked  onclick="setTimeLine('aj_dkp')">{|$lang.start|}{|$lang.timeline|}
+	{|else|}
+		<input name="istimeline" id="istimeline" type="checkbox"   onclick="setTimeLine('aj_dkp')">{|$lang.start|}{|$lang.timeline|}
+	{|/if|}
+	</td>
+  </tr>
+  <tr class="title"> 
+    <td>{|$lang.raid|}{|$lang.user|}:
+	{|$lang.note32|}
+	<input type="text" name="raiddkp" id="raiddkp" onKeyUp="setraiddkp('aj_dkp',this.value)" size=5>
+	<font color="red">{|$lang.note33|}</font> 
+	
+	{|if $smarty.cookies.wow_cfg_ispt == '1'|}
+		<input name="ispt" type="checkbox" value="1" checked>
+	{|else|}
+		<input name="ispt" type="checkbox" value="1">
+	{|/if|}
+	 {|$totalItemdkp|}/{|$totalMember|} = {|$totalItemdkp/$totalMember|string_format:"%.2f"|}
+	 
+	</td>
+  </tr>
+  <tr> 
+    <td>
+	<table width="90%">
+	<tr>
+		<td width="20%">{|$lang.user|}</td>
+		<td width="10%">{|$lang.race|}</td>
+		<td width="10%">{|$lang.work|}</td>
+		<td width="5%">{|$lang.level|}</td>
+		<td width="10%">{|$lang.dkp|}</td>
+		<td width="10%">{|$lang.opertion|}</td>
+		<td>{|$lang.timeline|}</td>
+	</tr>
+	{|foreach item=val key=key from=$validMember|}
+	<tr bgcolor="{|cycle values="#252525,#161616"|}">
+		<td>
+		<input type="hidden" name="aj_player[]" value="{|$val.name|}">
+		<input type="hidden" name="aj_uid[]" value="{|$val.uid|}">
+		<input type="hidden" name="aj_uiddkp{|$key|}" id="aj_uiddkp{|$key|}" value="{|$val.raidtime2/2|}">
+		{|$val.name|}
+		</td>
+		<td>{|$val.race|}</td>
+		<td>{|$val.class|}</td>
+		<td>{|$val.level|}</td>
+		<td><input type="text" name="aj_dkp[]" value="0" size=5></td>
+		<td><input name="aj_isesc[]" type="checkbox" value="{|$val.uid|}">{|$lang.cancle|}</td>
+		<td>
+			<img border="0" src="./images/timelinered.gif" width="{|$val.raidtime1|}" height="20">
+			<img border="0" src="./images/timelinegreen.gif" width="{|$val.raidtime2|}" height="20" onMouseover="ddrivetip('{|$lang.action|}{|$lang.time|}:{|$val.raidtime2/2|}%')" onMouseout="hideddrivetip()">
+			<img border="0" src="./images/timelinered.gif" width="{|$val.raidtime3|}" height="20">
+		</td>
+	</tr>
+	{|/foreach|}
+	</table>
+	</td>
+  </tr>
+
+  <tr class="title"> 
+    <td>{|$lang.item|}{|$lang.note24|}:
+	</td>
+  </tr>
+  <tr> 
+    <td><table>
+		<tr><td>{|$lang.user|}</td><td>{|$lang.note24|}{|$lang.item|}</td><td>{|$lang.note23|}</td><td>{|$lang.dkp|}</td><td>{|$lang.time|}</td><td>{|$lang.copy|}</td><td>{|$lang.opertion|}</td></tr>
+		{|foreach item=val from=$lootarray|}
+		<tr bgcolor="{|cycle values="#252525,#161616"|}">
+			<td>
+				<input type="hidden" name="lo_player_old[]" value="{|$val.Player|}">
+				<input type="text" name="lo_player[]" value="{|$val.Player|}">
+				</td>
+			<td>
+			<input type="hidden" name="lo_ITEMNAME[]" value="{|$val.ItemName|}">
+			<input type="hidden" name="lo_ITEMPROPERTY[]" value='{|$val.tooltip|}'>
+			<input type="hidden" name="lo_itemnum[]" value="{|$val.Count|}">
+			<input type="hidden" name="lo_COLOR[]" value="{|$val.Color|}">
+			<input type="hidden" name="lo_uid[]" value="{|$val.uid|}">
+			<input type="hidden" name="lo_ITEMID[]" value="{|$val.ItemID|}">
+			<input type="hidden" name="lo_ZONE[]" value="{|$val.Zone|}">
+			<input type="hidden" name="lo_BOSS[]" value="{|$val.Boss|}">
+
+			<font color="#{|$val.Color|}">{|$val.ItemName|}</font>
+			</td>
+			<td>{|$val.Count|}</td>
+			<td><input type="text" name="lo_dkp[]" value="{|$val.Costs|}"></td>
+			<td>{|$val.TIME|}</td>
+			<td><select name="lo_cid[]">{|html_options options=$copyarray selected=$cid|}</select></td>
+			<td><input name="lo_isesc[]" type="checkbox" value="{|$val.ItemName|}">{|$lang.cancle|}</td>
+		</tr>
+		{|/foreach|}
+	</table></td>
+  </tr>
+  <tr>
+    <td align="center"><input type="submit" value="{|$lang.raidlog|}" name="xmlsubmit"></td>
+  </tr>
+  </form>
+</table>
+</body>
+</html>
+
+

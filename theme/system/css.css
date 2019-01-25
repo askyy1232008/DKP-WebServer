@@ -1,0 +1,27 @@
+BODY	 {  BACKGROUND-COLOR: #000000; BACKGROUND-IMAGE: url('./images/alliance-tile.jpg'); BACKGROUND-REPEAT: repeat-x; margin: 0px;}
+Table.threadTopic  { background-color: #0C0C0C; border-style: solid; border-width: 1px; border-color: #8C8E89 #8C8E89 #0C0C0C #0C0C0C; }
+TD.tableHeader 	{ background-color: #393731; background-image: url('./images/thread-topic-bg2.gif'); border-style: solid; border-width: 1px; border-color: #8F8F8F #8F8F8F #171511 #171511; font-size: 10pt; font-weight: bold; color: #ffffff; }
+
+.red { color: red; }
+
+
+
+A:link    { color: #FFB019; }
+A:active  { color: #FFB019;}
+A:visited { color: #FFB019;}
+A:hover   { color: white;}
+
+B		  { color: #E2D9B0; font-weight: bold; }
+B.white   { color: #ffffff; font-weight: bold; }
+
+
+.navtext { color: #FFB019; font-weight: bold; font-size: 9pt;}
+.maintitle { color: #FFB019; font-weight: bold; font-size: 12pt;}
+.input { font-family: Verdana, Tahoma, Arial; font-size: 9pt; color: #FFB019; background-color: #333333; }
+input{ font: 12px song, Verdana; color: #FFB019; font-weight: normal; background-color: #333333 }
+.contitle{font-family: Arial,Helvetica,Sans-Serif; color: #D7CEA4; font-size: 9pt; background-image: url('./images/thread-topic-bg2.gif');height: 25px;}
+.itime{font-style: italic; font-size: 8pt; color: #C4C4C4;}
+.newstitle{ font-family: Arial,Helvetica,Sans-Serif; font-size: 10pt; font-weight: bold;}
+
+td 	{ font-family: Arial,Helvetica,Sans-Serif; font-size: 9pt; color: #D7CEA4;}
+select{ font-family: Arial,Helvetica,Sans-Serif; font-size: 9pt; color: #FFB019; background-color: #333333;}

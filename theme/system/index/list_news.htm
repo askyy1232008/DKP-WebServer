@@ -1,0 +1,101 @@
+{|include file=header.htm|}
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" height="80">
+<tbody>
+	<tr><td width="387">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td width="88">
+					<div style="position: relative;">
+					<div style="position: absolute; top: -41px; left: 29px;">
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons-top.gif" border="0" height="41" width="34">
+					</div>
+					</div>
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons.gif" border="0" height="51" width="88">
+				</td>
+				<td background="./theme/{|$theme|}/images/header-blank.gif" width="299">
+					<table border="0" cellpadding="0" cellspacing="0" width="299">
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<table border="0" cellpadding="0" cellspacing="0" width="299">
+								<tbody>
+									<tr>
+										<td colspan="2"><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="1" width="299"></td>
+									</tr>
+									<tr>
+										<td><span class="navtext">{|$lang.news|}</span>
+										
+										</td>
+										<td><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="24" width="1"></td>
+									</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="2">&nbsp;
+							</td>
+						</tr>
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr><td colspan="2"></td></tr>		
+		</tbody>
+		
+		</table>
+		</td>
+		
+		<td align="right" valign="top" width="100%">	
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr><td colspan="4"></td>&nbsp;</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</tbody>
+		</table>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<table width="100%" border="0">
+  <tr>
+	<td width="80%" valign="top">
+		<table width="100%" border="0">
+		{|foreach item=val from=$userdata|} 
+		<tr>
+		<td width="5">&nbsp;</td>
+		  <td><span class="newstitle"><a href="index.php?module=index&act=viewnews&id={|$val.id|}" target="_blank"><img src="././theme/{|$theme|}/images/blizz.gif" width="22" height="15" border="0" alt="news">{|$val.title|truncate:70:"...":true|}</a></span> 
+			&nbsp;&nbsp;&nbsp;&nbsp;<span class="itime">{|$val.posttime|}</span> </td>
+		</tr>
+		<tr>
+		<td width="5">&nbsp;</td>
+		  <td class="news_txt">{|$val.content|truncate:500:"...":true|}</td>
+		</tr>
+		<tr>
+		<td width="5">&nbsp;</td>
+		  <td>&nbsp;</td>
+		</tr>
+		{|/foreach|} 
+		<tr> 
+		<td width="5">&nbsp;</td>
+		<td>{|$pageText|}</td>
+		</tr>
+		</table></td>
+	<td width="20%" align="left" valign="top" cellspacing=0 cellpadding=0>
+	<!--news
+	<iframe id="wow" width="100%" height="500" marginwidth=0 marginheight=0 hspace=0 vspace=0 frameborder=0 scrolling=no src='index.php?act=ibokonews'></iframe>
+	-->
+	</td>
+  </tr>
+</table>
+
+{|include file=foot.htm|} 

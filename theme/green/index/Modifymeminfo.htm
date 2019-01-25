@@ -1,0 +1,79 @@
+{|include file="header.htm"|}
+
+{|if $smarty.session.member.uid|}
+<table border="0" cellpadding="0" cellspacing="0">
+<tr class="sectiontitle">
+<td>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?module=index&act=viewmember&id={|$smarty.session.member.uid|}">{|$lang.all|}{|$lang.info|}</a> &nbsp;
+<a href="index.php?module=index&act=modifymeminfo">{|$lang.modify|}{|$lang.info|}</a>
+&nbsp;
+<a href="index.php?module=index&act=list&obj=actionlist">{|$lang.action|}{|$lang.signup|}</a>
+</td>
+</tr>
+</table>
+{|else|}
+<br />
+{|/if|}
+
+<table width="90%" border="0">
+<form enctype="multipart/form-data" action="index.php?module=index&act=updatememinfo" method="POST">
+  <tr>
+    <td width="70" align="center">
+	{|if $userinfo.pic|}
+	<img style="filter : progid:DXImageTransform.Microsoft.Glow(color=#70472A,Strength=8" src="img/{|$userinfo.pic|}">
+	{|/if|}
+	</td>
+    <td class="maintitle">{|$userinfo.name|}</td>
+  </tr>
+  <tr>
+	<td>&nbsp;</td>
+    <td><b>{|$lang.race|}:</b>
+		<select name="raceid">
+		{|html_options options=$racearray selected=$userinfo.raceid|}
+		</select>
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+    <td><b>{|$lang.work|}:</b>
+		<select name="workid">
+		{|html_options options=$workarray selected=$userinfo.workid|}
+		</select>
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+    <td><b>{|$lang.password|}:</b>
+		<input type="password" name="password" value="">
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+	<td><b>{|$lang.level|}:</b>
+	<input type="text" name="level" value="{|$userinfo.level|}">
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+	<td><b>{|$lang.pic|}:</b>
+	<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+	<input type="file" name="photofile" />70X80 px
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+	<td><b>{|$lang.notes|}:</b>
+	<textarea name="notes" rows="3" cols="30" class="input">{|$userinfo.notes|}</textarea>
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+	<td><input type="submit" value="{|$lang.modify|}"></td>
+  </tr>
+  </form>
+  <tr>
+    <td align="right" class="small" colspan="2">{|$lang.sitetitle|}</td>
+  </tr>
+</table>
+
+{|include file="foot.htm"|}

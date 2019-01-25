@@ -1,0 +1,176 @@
+{|include file="header.htm"|}
+
+{|if $smarty.session.member.uid|}
+<table width="100%" border="0">
+<form method="get" action="index.php">	
+<tr class="sectiontitle">
+<td>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?module=index&act=viewmember&id={|$smarty.session.member.uid|}">{|$lang.all|}{|$lang.info|}</a> &nbsp;
+<a href="index.php?module=index&act=modifymeminfo">{|$lang.modify|}{|$lang.info|}</a>
+&nbsp;
+<a href="index.php?module=index&act=list&obj=actionlist">{|$lang.action|}{|$lang.signup|}</a>
+</td>
+</tr>
+</form>
+</table>
+{|else|}
+<br />
+{|/if|}
+
+
+<!-- start -->
+<script type="text/javascript" src="./script/wow.js"></script>
+<table width="90%">
+	<tr>
+		<td width="50%" valign="top">
+			<table width="100%">
+			<tr class="contenttitle"><td colspan="5">{|$lang.action|}{|$lang.info|}</td></tr>
+			<tr><td colspan="5">{|$actioninfo.name|}</td></tr>
+			<tr><td>{|$lang.configure|}:</td><td>{|$actioninfo.cfg|}</td></tr>
+			<tr><td>{|$lang.current|}{|$lang.time|}:</td><td>{|$actioninfo.currenttime|}</td></tr>
+			<tr><td>{|$lang.invitetime|}:</td><td>{|$actioninfo.invitetime|}</td></tr>
+			<tr><td>{|$lang.starttime|}:</td><td>{|$actioninfo.starttime|}</td></tr>
+			<tr><td>{|$lang.circaendtime|}:</td><td>{|$actioninfo.circaendtime|}</td></tr>
+			<tr><td>{|$lang.raidmax|}:</td><td>{|$actioninfo.maxnum|}</td></tr>
+			<tr><td>{|$lang.minlevel|}:</td><td>{|$actioninfo.minlevel|}</td></tr>
+			<tr><td>{|$lang.maxlevel|}:</td><td>{|$actioninfo.maxlevel|}</td></tr>
+			{|if $actioninfo.autoqueue == '1'|}
+				<tr><td colspan="5">{|$lang.autoqueue|}</td></tr>
+			{|/if|}
+			<tr><td colspan="5">{|$lang.freezelimit|}: {|$actioninfo.freezelimit|}</td></tr>
+			</table>
+		</td>
+		<td valign="top">
+			<table border=0 width="100%">
+			<tr class="contenttitle"><td colspan="5">{|$lang.reqclass|} & {|$lang.reqresistance|}</td></tr>
+			<tr>
+			<td valign="top">
+				<table width="100%">
+				{|foreach item=val key=key from=$actioninfo.classes|}
+				<tr><td>{|$classarr.$key|}:</td><td>{|$val|}</td></tr>
+				{|/foreach|}
+				</table>
+			</td>
+			<td valign="top">
+				<table width="100%">
+				{|foreach item=val key=key from=$actioninfo.resistancereq|}
+				<tr><td>{|$lang.resistance.$key|}:</td><td>{|$val|}</td></tr>
+				{|/foreach|}
+				</table>
+			</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr><td colspan=2 align="center">
+		{|if $actioninfo.stat == '0' and $isshow == '1'|}
+			{|if $issignup == '0'|}
+			<form name="signup" method="POST" action="index.php?module=index&act=signup">
+			<input type="hidden" name="logid" value="{|$actioninfo.id|}">
+			<input type="submit" name="signup" value="{|$lang.signup|}{|$lang.action|}">
+			</form>
+			{|elseif $issignup == '2'|}
+			<form name="signup" method="POST" action="index.php?module=index&act=unsignup">
+			<input type="hidden" name="logid" value="{|$actioninfo.id|}">
+			<input type="submit" name="unsignup" value="{|$lang.cancle|}{|$lang.signup|}" onclick="return confirmLink(this, 'cancle the signup ?')">
+			</form>
+			{|else|}
+			<input type="submit" name="" value="{|$lang.signup|}{|$lang.action|}" disabled="true">
+			{|/if|}
+		{|else|}
+		<input type="submit" name="" value="{|$lang.history|}{|$lang.action|}" disabled="true">
+		{|/if|}
+	</td></tr>
+</table>
+
+<br />
+<table width="100%" border="0">
+	<tr class="sectiontitle">
+		<td colspan="7">{|$lang.signup|}{|$lang.list|}-{|$lang.fullmember|}</td>
+	</tr>
+	
+	{|foreach item=val key=key from=$fullmembers|}
+	<tr><td colspan="7">
+		<FIELDSET style="padding: 10px 10px 10px 10px;">
+					<LEGEND style="margin-bottom: 4px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold;"><b><font color="{|$val.color|}">{|$val.cname|}</font></b></LEGEND>				
+		<table width="100%" border="0" cellpadding="0" cellspacing="0">
+		<tr class="contenttitle"> 
+			<td width="20%">{|$lang.user|}</td>
+			<td width="10%">{|$lang.work|}</td>
+			<td width="10%">{|$lang.level|}</td>
+			<td>{|$lang.signup|}{|$lang.time|}</td>
+		</tr>
+		{|foreach item=val2 from=$val.member|}
+		<tr class="{|cycle values="rowa,rowb"|}">
+			<td><font color="{|$val2.color|}">{|$val2.username|}</font></td>
+			<td><font color="{|$val2.color|}">{|$val2.classname|}</font></td>
+			<td>{|$val2.level|}</td>
+			<td>{|$val2.signtime|}</td>
+		</tr>
+		{|/foreach|}
+		</table>
+		</FIELDSET>
+	</td></tr>
+	{|/foreach|}
+
+	<tr>
+		<td colspan="7">&nbsp;</td>
+	</tr>
+
+	<tr class="sectiontitle">
+		<td colspan="7">{|$lang.signup|}{|$lang.list|}-{|$lang.recruit|}</td>
+	</tr>
+	<tr class="contenttitle"> 
+		<td>{|$lang.user|}</td>
+		<td>{|$lang.work|}</td>
+		<td>{|$lang.level|}</td>
+		<td>{|$lang.signup|}{|$lang.time|}</td>
+		<td>&nbsp;</td>
+	</tr>
+	{|foreach item=val2 key=key from=$recruits|}
+	<tr class="{|cycle values="rowa,rowb"|}">
+		<td><font color="{|$val2.color|}">{|$val2.username|}</font></td>
+		<td><font color="{|$val2.color|}">{|$val2.classname|}</font></td>
+		<td>{|$val2.level|}</td>
+		<td>{|$val2.signtime|}</td>
+		<td>&nbsp;</td>
+	</tr>
+	{|/foreach|}
+
+	<tr>
+		<td colspan="7">&nbsp;</td>
+	</tr>
+
+	<tr class="sectiontitle">
+		<td colspan="7">{|$lang.signup|}{|$lang.list|}-{|$lang.cancle|}{|$lang.user|}</td>
+	</tr>
+	<tr class="contenttitle"> 
+		<td>{|$lang.user|}</td>
+		<td>{|$lang.work|}</td>
+		<td>{|$lang.level|}</td>
+		<td>{|$lang.signup|}{|$lang.time|}</td>
+		<td>&nbsp;</td>
+	</tr>
+	{|foreach item=val2 key=key from=$cancels|}
+	<tr class="{|cycle values="rowa,rowb"|}">
+		<td><font color="{|$val2.color|}">{|$val2.username|}</font></td>
+		<td><font color="{|$val2.color|}">{|$val2.classname|}</font></td>
+		<td>{|$val2.level|}</td>
+		<td>{|$val2.signtime|}</td>
+		<td>&nbsp;</td>
+	</tr>
+	{|/foreach|}
+
+</table>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+{|include file="foot.htm"|}
+

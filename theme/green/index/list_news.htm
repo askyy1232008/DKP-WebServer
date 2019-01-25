@@ -1,0 +1,31 @@
+{|include file="header.htm"|}
+
+<script language="javascript" type="text/javascript">
+function ImageLoad(img) {
+img.style.zoom='1';
+if(img.width>600) img.width=600;
+}
+function ImageOpen(img) {
+window.open(img.src,'','menubar=no,scrollbars=yes,width='+(screen.width-8)+',height='+(screen.height-74)+',left=0,top=0');
+}
+</script>
+
+<table width="100%" border="0">
+{|foreach item=val from=$userdata|} 
+<tr class="sectiontitle">
+  <td colspan="5"> <a href="index.php?module=index&act=viewnews&id={|$val.id|}" target="_blank">{|$val.title|truncate:50:"...":true|}</a> 
+	&nbsp;&nbsp;&nbsp;&nbsp;{|$val.posttime|} </td>
+</tr>
+<tr>
+  <td class="rightcontent">{|$val.content|truncate:300:"...":true|}</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+</tr>
+{|/foreach|} 
+<tr> 
+  <td colspan="5">{|$pageText|}</td>
+</tr>
+</table>
+
+{|include file="foot.htm"|}

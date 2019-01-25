@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.event|}{|$lang.list|}</title>
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+
+<table width="100%" border="0">
+<form method="get" action="index.php">
+	<tr class="title">
+		<td colspan="8">{|$lang.event|}{|$lang.list|}
+		<input type="hidden" name="module" value="admin" />
+		<input type="hidden" name="act" value="eventlist" />
+		<select name="cid" class="input" onchange="javascript:form.submit();">
+		{|html_options options=$copyarray selected=$getval.cid|}
+		</select>
+		<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'event');" />
+		<input type="submit" value="{|$lang.event|}{|$lang.search|}">
+		</td>
+	</tr>
+</form>
+
+  <tr class="header">
+  	<td><a href="{|$baseurl|}&orderby=id">{|$lang.num|}</a></td>
+  	<td><a href="{|$baseurl|}&orderby=name">{|$lang.name|}</a></td>
+  	<td>{|$lang.copy|}</td>
+  	<td><a href="{|$baseurl|}&orderby=etid">{|$lang.event|}{|$lang.type|}</a></td>
+  	<td><a href="{|$baseurl|}&orderby=raidtime">{|$lang.event|}{|$lang.time|}</a></td>
+    <td>{|$lang.opertion|}</td>
+  </tr>
+
+  {|foreach item=val from=$userdata|}
+  <tr bgcolor="{|cycle values="#252525,#161616"|}">
+			<td>{|$val.id|}</td>
+			<td>{|$val.name|}</td>
+			<td>{|$val.copy|truncate:30:"...":true|}</td>
+			<td>{|$val.etid|}</td>
+			<td>{|$val.raidtime|}</td>
+		<td>
+			<a href="?module=admin&act=delete&obj=event&id={|$val.id|}" onclick="return confirmLink(this, 'delete the record?')">{|$lang.delete|}</a> 
+			<a href="?module=admin&act=modify&obj=event&id={|$val.id|}">{|$lang.modify|}</a> 
+			</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="8">{|$pageText|}</td>
+  </tr>
+</table>
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+</body>
+</html>

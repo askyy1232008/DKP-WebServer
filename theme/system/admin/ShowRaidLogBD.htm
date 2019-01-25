@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<title></title>
+<script language="JavaScript">
+function validate(theform) {
+theform.xmlsubmit.disabled = true;
+return true;
+}
+</script>
+</head>
+<body>
+
+<form method=post name="raidlog" action="index.php?module=admin&act=RecordDkpByLogBD" onSubmit="return validate(this)">
+<table width="100%">
+
+<tr>
+	<td width="10%">{|$lang.raid|}</td>
+	<td><input type="text" name="raidname" value="[{|$startDate|}]{|$zone|}" size="60"></td>
+</tr>
+<tr>
+	<td>{|$lang.time|}</td>
+	<td>{|$startDate|} &nbsp;&nbsp;{|$startHours|}-{|$endHours|}&nbsp;&nbsp;<font color="green">{|$lang.total|}:{|$totalTime|}  {|$lang.minute|}</font></td>
+</tr>
+<tr>
+	<td>{|$lang.user|}{|$lang.note23|}</td>
+	<td>
+		{|$totalMember|}
+		<input type="hidden" name="membertotal" value="{|$totalMember|}">
+		{|foreach item=val from=$validMember|}
+		<input type="hidden" name="members[]" value="{|$val.name|}">
+		{|/foreach|}
+		<input type="hidden" name="eventTime" value="{|$startDate|}">
+		<input type="hidden" name="cid" value="{|$cid|}">
+		<input type="hidden" name="etid" value="{|$etid|}">
+	</td>
+</tr>
+<tr>
+	<td>{|$lang.notes|}</td>
+	<td><input type="text" name="notes" value="{|$zone|}" size="60"></td>
+</tr>
+
+
+<!--line-->
+<tr>
+	<td colspan="2">
+		<table width="90%">
+		<tr class="title">
+			<td>{|$lang.item|}</td>
+			<td>{|$lang.dkp|}</td>
+			<td>{|$lang.note24|}</td>
+			<td>{|$lang.note44|}</td>
+			<td>{|$lang.note42|}</td>
+			<td>{|$lang.time|}</td>
+		</tr>
+		<tr>
+			<td colspan="6">
+				<input type="hidden" name="allaverevent" value="{|$eventDate|}{|$zone|}">
+				{|if $smarty.cookies.wow_cfg_ispt == '1'|}
+					<input name="aispt" type="checkbox" value="1" checked>
+				{|else|}
+					<input name="aispt" type="checkbox" value="1">
+				{|/if|}
+				<font color="red">{|$lang.note33|}</font>
+				{|$nobossdkp|}/{|$totalMember|} = {|$nobossdkp/$totalMember|string_format:"%.2f"|}
+			</td>
+		</tr>
+		{|foreach item=val from=$nobossLoot|}
+		{|if $val.state != '1'|}
+		<tr bgcolor="{|cycle values="#252525,#161616"|}">
+			<td><font color="#{|$val.Color|}">{|$val.ItemName|}</font></td>
+			<td><input type="text" name="aitemcosts[]" value="{|$val.Costs|}" size="5"></td>
+			<td><input type="text" name="aitemplayer[]" value="{|$val.Player|}"></td>
+			<td>
+				<select name="toboss[]">
+				{|html_options options=$bossArray selected=$val.toboss|}
+				</select>
+			</td>
+			<td>{|$val.Boss|}</td>
+			<td>
+				{|$val.Time|}
+				<input type="hidden" name="aitemname[]" value="{|$val.ItemName|}">
+				<input type="hidden" name="aitemcount[]" value="{|$val.Count|}">				
+				<input type="hidden" name="aitemcolor[]" value="{|$val.Color|}">
+				<input type="hidden" name="aitemtooltip[]" value="{|$val.tooltip|}">
+				<input type="hidden" name="aitemid[]" value="{|$val.ItemID|}">
+			</td>
+		</tr>
+		{|/if|}
+		{|/foreach|}
+		</table>
+	</td>
+</tr>
+<!--endline-->
+</table>
+
+<table width=100%>
+{|foreach item=val from=$BossKillsarray|}
+<tr>
+	<td class="title">
+		{|$lang.event|}{|$lang.name|}:<input type="text" name="boss[{|$val.name|}]" value="[{|$startDate|}]{|$zone|}-{|$val.name|}" size="60" />
+	</td>
+</tr>
+<tr>
+	<td >{|$lang.note32|}:<input type="text" name="dis[{|$val.name|}]" value="0" />
+		
+		{|if $smarty.cookies.wow_cfg_ispt == '1'|}
+			<input name="ispt[{|$val.name|}]" type="checkbox" value="1" checked>
+		{|else|}
+			<input name="ispt[{|$val.name|}]" type="checkbox" value="1">
+		{|/if|}		
+		<font color="red">{|$lang.note33|}</font>
+		{|$val.lootcosts|}/{|$val.usernum|}={|$val.lootcosts/$val.usernum|string_format:"%.2f"|}
+	</td>
+</tr>
+<tr>
+	<td >{|$lang.time|}:{|$val.time|}</td>
+</tr>
+<tr>
+	<td >{|$lang.user|}:{|$val.usernum|}</td>
+</tr>
+<tr>
+	<td>{|$lang.notes|}:<input type="text" name="enotes[{|$val.name|}]" value="{|$zone|}-{|$val.name|}" size="60"></td>
+</tr>
+<tr>
+	<td>
+		<textarea name="raidmember[{|$val.name|}]" rows="20" cols="20" class="input">{|$val.members|}</textarea>
+	</td>
+</tr>
+<tr>
+	<td>
+		<table width="60%">
+			<tr class="title">
+				<td>{|$lang.item|}</td>
+				<td>{|$lang.note23|}</td>
+				<td>{|$lang.dkp|}</td>
+				<td>{|$lang.note24|}</td>
+			</tr>
+			{|foreach item=ival from=$val.item|}
+			<tr bgcolor="{|cycle values="#252525,#161616"|}">
+				<td>
+					<font color="#{|$ival.Color|}">{|$ival.ItemName|}</font>
+					<input type="hidden" name="itemname[{|$val.name|}][]" value="{|$ival.ItemName|}">
+					<input type="hidden" name="itemcount[{|$val.name|}][]" value="{|$ival.Count|}">
+					<input type="hidden" name="itemid[{|$val.name|}][]" value="{|$ival.ItemID|}">
+					<input type="hidden" name="itemcolor[{|$val.name|}][]" value="{|$ival.Color|}">
+					<input type="hidden" name="itemtooltip[{|$val.name|}][]" value="{|$ival.tooltip|}">
+					<input type="hidden" name="itemboss[{|$val.name|}][]" value="{|$ival.Boss|}">
+				</td>
+				<td>{|$ival.Count|}</td>
+				<td><input type="text" name="itemcosts[{|$val.name|}][]" value="{|$ival.Costs|}" size="5"></td>
+				<td><input type="text" name="itemplayer[{|$val.name|}][]" value="{|$ival.Player|}"></td>
+			</tr>
+			{|/foreach|}
+		</table>
+	</td>
+</tr>
+<tr><td>&nbsp;</td></tr>
+{|/foreach|}
+<tr><td align="center"><input type="submit" name="xmlsubmit"></td></tr>
+</table>
+
+</form>
+</body>
+</html>

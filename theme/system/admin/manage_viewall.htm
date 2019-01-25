@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<title>{|$lang.note34|}</title>
+</head>
+
+<body>
+<form ID="ProList" name="ProList" method="post" action="?module=admin&act=viewall">
+  <table border="0" width="100%">
+    <tr class="title"> 
+      <td colspan="3">{|$lang.note34|}</td>
+    </tr>
+    {|foreach item=val from=$userdata|} 
+    <tr bgcolor="{|cycle values="#252525,#161616"|}"> 
+      <td height="20" align="center">&nbsp;</td>
+      <td align="center"><div align="left">
+	  {|if $val.vstat==1|}
+		<input type="checkbox" name="checkbox[]" value="{|$val.id|}" checked>
+	  {|else|}
+		<input type="checkbox" name="checkbox[]" value="{|$val.id|}">
+	  {|/if|}
+          {|$val.name|}
+        </div></td>
+    </tr>
+    {|/foreach|} 
+
+    <tr> 
+	<td height="20" align="center">&nbsp;</td>
+    <td>
+		<input type="submit" name="copyset" value=" {|$lang.configure|} ">
+    </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

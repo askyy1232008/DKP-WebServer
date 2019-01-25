@@ -1,0 +1,138 @@
+{|include file=header.htm|}
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" height="80">
+<tbody>
+	<tr><td width="387">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td width="88">
+					<div style="position: relative;">
+					<div style="position: absolute; top: -41px; left: 29px;">
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons-top.gif" border="0" height="41" width="34">
+					</div>
+					</div>
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons.gif" border="0" height="51" width="88">
+				</td>
+				<td background="./theme/{|$theme|}/images/header-blank.gif" width="299">
+					<table border="0" cellpadding="0" cellspacing="0" width="299">
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<table border="0" cellpadding="0" cellspacing="0" width="299">
+								<tbody>
+									<tr>
+										<td colspan="2"><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="1" width="299"></td>
+									</tr>
+									<tr>
+										<td><span class="navtext">
+{|if $smarty.session.member.uid|}
+<a href="index.php?module=index&act=viewmember&id={|$smarty.session.member.uid|}">{|$lang.all|}{|$lang.info|}</a> &nbsp;
+<a href="index.php?module=index&act=modifymeminfo">{|$lang.modify|}{|$lang.info|}</a>
+&nbsp;
+<a href="index.php?module=index&act=list&obj=actionlist">{|$lang.action|}{|$lang.signup|}</a>
+{|/if|}
+&nbsp;
+										</span>										
+										</td>
+										<td><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="24" width="1"></td>
+									</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="2">&nbsp;</td>
+						</tr>
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr><td colspan="2">&nbsp;</td></tr>		
+		</tbody>
+		
+		</table>
+		</td>
+		
+		<td align="right" valign="top" width="100%">	
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr><td colspan="4"></td>&nbsp;</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</tbody>
+		</table>
+		</td>
+	</tr>
+</form>
+</tbody>
+</table>
+
+
+<table width="90%" border="0">
+<form enctype="multipart/form-data" action="index.php?module=index&act=updatememinfo" method="POST">
+  <tr>
+    <td width="70" align="center">
+	{|if $userinfo.pic|}
+	<img style="filter : progid:DXImageTransform.Microsoft.Glow(color=#70472A,Strength=8" src="img/{|$userinfo.pic|}">
+	{|/if|}
+	</td>
+    <td class="maintitle">{|$userinfo.name|}</td>
+  </tr>
+  <tr>
+	<td>&nbsp;</td>
+    <td><b>{|$lang.race|}:</b>
+		<select name="raceid">
+		{|html_options options=$racearray selected=$userinfo.raceid|}
+		</select>
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+    <td><b>{|$lang.work|}:</b>
+		<select name="workid">
+		{|html_options options=$workarray selected=$userinfo.workid|}
+		</select>
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+    <td><b>{|$lang.password|}:</b>
+		<input type="password" name="password" value="">
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+	<td><b>{|$lang.level|}:</b>
+	<input type="text" name="level" value="{|$userinfo.level|}">
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+	<td><b>{|$lang.pic|}:</b>
+	<input type="hidden" name="MAX_FILE_SIZE" value="30000" />
+	<input type="file" name="photofile" />70X80 px
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+	<td><b>{|$lang.notes|}:</b>
+	<textarea name="notes" rows="3" cols="30" class="input">{|$userinfo.notes|}</textarea>
+	</td>
+  </tr>
+  <tr>
+  <td>&nbsp;</td>
+	<td><input type="submit" value="{|$lang.modify|}"></td>
+  </tr>
+  </form>
+  <tr>
+    <td align="right" class="small" colspan="2">{|$lang.sitetitle|}</td>
+  </tr>
+</table>
+
+{|include file=foot.htm|} 

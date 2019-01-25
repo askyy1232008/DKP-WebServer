@@ -1,0 +1,140 @@
+{|include file=header.htm|} 
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+
+<div id='citybox' onbulr></div>
+<script type="text/javascript">
+var objouter = document.getElementById("citybox");
+var xajaxRequestUri="xajax_service.php";
+var xajaxDebug=false;
+var xajaxStatusMessages=false;
+var xajaxWaitCursor=true;
+var xajaxDefinedGet=0;
+var xajaxDefinedPost=1;
+var xajaxLoaded=false;
+function xajax_getInfo(){return xajax.call("getInfo", arguments, 1);}
+</script>
+<script type="text/javascript" src="xajax_js/xajax.js"></script>
+<script type="text/javascript">
+window.setTimeout(function () { if (!xajaxLoaded) { alert('Error: the xajax Javascript file could not be included. Perhaps the URL is incorrect?\nURL: xajax_js/xajax.js'); } }, 6000);
+</script>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" height="80">
+<tbody>
+<form method="get" action="index.php">
+	<tr><td width="387">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td width="88">
+					<div style="position: relative;">
+					<div style="position: absolute; top: -41px; left: 29px;">
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons-top.gif" border="0" height="41" width="34">
+					</div>
+					</div>
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons.gif" border="0" height="51" width="88">
+				</td>
+				<td background="./theme/{|$theme|}/images/header-blank.gif" width="299">
+					<table border="0" cellpadding="0" cellspacing="0" width="299">
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<table border="0" cellpadding="0" cellspacing="0" width="299">
+								<tbody>
+									<tr>
+										<td colspan="2"><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="1" width="299"></td>
+									</tr>
+									<tr>
+										<td><span class="navtext">{|$lang.event|}{|$lang.list|}</span>
+										
+										</td>
+										<td><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="24" width="1"></td>
+									</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="2">
+								<input type="hidden" name="module" value="index" />
+								<input type="hidden" name="act" value="events" />
+								<input type="text" name="keyword" id="keyword" value="{|$getval.keyword|}" size="20" onkeyup="xajax_getInfo(document.getElementById('keyword').value,'event');" />
+								<input type="submit" value="{|$lang.search|}">
+							</td>
+						</tr>
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr><td colspan="2"></td></tr>		
+		</tbody>
+		
+		</table>
+		</td>
+		
+		<td align="right" valign="top" width="100%">	
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr><td colspan="4"></td>&nbsp;</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td><span class="navtext">{|$lang.copy|}</span></td>
+				<td></td>
+				<td><span>
+					<select name="cid" class="input" onchange="javascript:form.submit();">
+					{|html_options options=$copyarray selected=$getval.cid|}
+					</select>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+		</td>
+	</tr>
+</form>
+</tbody>
+</table>
+
+
+
+<table width="100%" border="0" cellspacing="0">
+  <tr class="contitle">
+	<th>{|$lang.num|}</th>
+	<th><a href="?module={|$getval.module|}&act={|$getval.act|}&keyword={|$getval.keyword|}&cid={|$getval.cid|}&orderby=name">{|$lang.name|}</a></th>
+	<th>{|$lang.type|}</th>
+	<th>{|$lang.dkp|}</th>
+	<th><a href="?module={|$getval.module|}&act={|$getval.act|}&keyword={|$getval.keyword|}&cid={|$getval.cid|}&orderby=raidtime">{|$lang.time|}</a></th>
+  </tr>
+  {|foreach item=val from=$userdata|}
+  <tr bgcolor="{|cycle values="#252525,#161616"|}" class="navtext">
+			<td align="center">{|$val.id|}</td>
+			<td><a href="?module={|$getval.module|}&act=viewraids&id={|$val.id|}" target="_blank">{|$val.name|}</a></td>
+			<td>{|$val.eventtype|}</td>
+			<td align="center">{|$val.value|}</td>
+			<td align="center">{|$val.raidtime|}</td>
+  </tr>
+  {|/foreach|}
+  <tr>
+	<td colspan="6">{|$pageText|}</td>
+  </tr>
+</table>
+
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+{|include file=foot.htm|} 

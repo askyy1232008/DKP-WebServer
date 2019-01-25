@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/addfile.js"></script>
+<title>{|$lang.add|}{|$lang.event|}</title>
+<script language="JavaScript">
+function CheckAllByName(formId, chkName, isChecked) {
+	var form = document.getElementById(formId);
+	for (var i=0; i<form.elements.length; i++) {
+		var c = form.elements[i];
+		if (c.name == chkName && c.type == 'checkbox'){
+			c.checked = isChecked;
+			continue;
+		} 
+	}
+}
+</script>
+</head>
+
+<body>
+<table width="100%" border="0">
+  <tr class="title"> 
+    <td colspan="2">{|$lang.add|}{|$lang.event|}</td>
+  </tr>
+  <form action="?module=admin&act={|$act|}" name="post" id="post" method="post">
+    <tr> 
+    <td width="20%">{|$lang.name|}</td>
+    <td><input type="text" name="name" id="name" value="[{|$dTime|}]" size="50"> </td>
+  </tr>
+    <tr> 
+    <td>{|$lang.notes|}</td>
+    <td><input type="text" name="notes" id="notes" value="{|$userdata.notes|}" size="50"> </td>
+  </tr>
+    <tr> 
+    <td>{|$lang.eventtypemanage|}</td>
+    <td>
+	<select name=etid>
+		{|html_options options=$eventtype selected=1|}
+	</select>
+	</td>
+  </tr>
+  </tr>
+    <tr> 
+    <td>{|$lang.pleaselect|}{|$lang.copy|}</td>
+    <td>
+	<select name="cid">
+		{|html_options options=$copyarray selected=1|}
+	</select>
+	</td>
+  </tr>
+    <tr> 
+    <td>{|$lang.event|}{|$lang.time|}</td>
+    <td><input type="text" name="raidtime" id="raidtime" value="{|$dTime|}"> </td>
+  </tr>
+  <tr> 
+    <td>{|$lang.dis|}{|$lang.dkp|}</td>
+    <td><input type="text" name="disdkp" id="disdkp" value="0"> </td>
+  </tr>
+  <tr> 
+    <td>{|$lang.note3|}</td>
+    <td>
+		<input type="radio" name="chg" onClick="CheckAllByName('post', 'uidselect[]', true)" checked>{|$lang.selectall|}
+		<input type="radio" name="chg"  onClick="CheckAllByName('post', 'uidselect[]', false)">{|$lang.note30|}
+	</td>
+  </tr>
+
+  
+
+    <tr>
+	<td colspan=3>
+
+      <table width="100%" border="0" cellpadding="3" cellspacing="0" class="borderless">
+        <tr>
+          <td width="100%">
+		  {|foreach item=val key=key from=$userinfo|}
+		  {|$val|}
+		  {|/foreach|}
+
+          </td>
+        </tr>
+      </table>
+
+	</td>
+  </tr>
+
+  <tr>
+	<td>{|$lang.event|}{|$lang.item|}</td>
+    <td>
+		<input name="attachfile0" type="text" id="attachfile0" value="" size=20>
+		<br>
+		<span id="idfilespan"></span>
+	</td>
+  </tr>
+  <tr>
+	<td>&nbsp;</td>
+	<td><a href="javascript:;" name="attach" id="attach" onclick="add();this.childNodes[0].nodeValue='继续添加';" title="如果您要添加多个规则，您只需多次点击“继续添加”即可">{|$lang.add|}</a></td>
+  </tr>
+
+  <tr> 
+    <td colspan="2" align=center><input type="submit"></td>
+  </tr>
+  </form>
+</table>
+<br />
+<br />
+<br />
+<br />
+</body>
+</html>

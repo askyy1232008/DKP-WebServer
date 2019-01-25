@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>database backup</title>
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+
+</head>
+
+<body>
+<FORM NAME="dobackup" METHOD="post" ACTION="?module={|$getval.module|}&act=createbackup"> 
+<table width="100%" border="0">
+  <tr> 
+    <td colspan="5" class="sectiontitle">{|$lang.backup|}{|$lang.database|}</td>
+  </tr>
+  <tr class="contenttitle"> 
+    <th>{|$lang.tablename|}</th>
+    <th>{|$lang.records|}</th>
+    <th>{|$lang.create|}{|$lang.time|}</th>
+    <th>{|$lang.dbsize|}</th>
+    <th>{|$lang.insize|}</th>
+  </tr>
+  {|foreach item=val key=i from=$tableArray|}
+  <tr class="{|cycle values="rowa,rowb"|}"> 
+    <td>
+		<input type='checkbox' id='tables{|$i|}' name='tables[{|$i|}]' value="{|$val.Name|}">{|$val.Name|}
+	</td>
+    <td align="center">{|$val.Rows|}</td>
+    <td align="center">{|$val.Create_time|}</td>
+    <td align="center">{|$val.Data_length/1024|string_format:"%.1f"|}</td>
+    <td align="center">{|$val.Index_length/1024|string_format:"%.1f"|}</td>
+  </tr>
+  {|/foreach|}
+
+  <tr class="navtext">
+	<th>{|$lang.total|}</th>
+	<th>{|$tabletotal.Rows|}</th>
+	<th>&nbsp;</th>
+	<th>{|$tabletotal.Data_length/1048576|string_format:"%.1f"|}MB</th>
+	<th>{|$tabletotal.Index_length/1048576|string_format:"%.1f"|}MB</th>
+  </tr>
+<!--
+  <tr> 
+    <td colspan="5"><input type='checkbox' name='structonly' value='Yes'>{|$lang.note29|} </td>
+  </tr>
+-->
+  <tr> 
+    <td colspan="5"> 
+	<input type="radio" name="chg" onclick="for(i=0;i<={|$i|};i++){document.getElementById('tables'+i).checked=true;}">{|$lang.selectall|}
+	<input type="radio" name="chg" onclick="for(i=0;i<={|$i|};i++){document.getElementById('tables'+i).checked=false;}">{|$lang.note30|} <br /> 
+	</td>
+  </tr>
+  <tr> 
+    <td colspan="5" align="center">{|$lang.backup|}{|$lang.database|}{|$lang.name|}: <input type="text" name="backupfilename" value="wowdkper_{|$smarty.now|date_format:'%Y-%m-%d'|}" size=30>
+    <input type="submit" name="send2" value="{|$lang.create|}{|$lang.backup|}"></td>
+  </tr>
+  <tr> 
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</form>
+
+<br />
+<table width="100%" border="0">
+  <tr> 
+    <td colspan="5" class="sectiontitle">{|$lang.restore|} & {|$lang.delete|} {|$lang.backup|}</td>
+  </tr>
+  <tr class="contenttitle"> 
+    <th>{|$lang.filename|}</th>
+    <th>{|$lang.dbsize|}</th>
+    <th>{|$lang.time|}</th>
+    <th>{|$lang.restore|} {|$lang.view|} {|$lang.download|}</th>
+    <th>{|$lang.delete|}</th>
+  </tr>
+
+  {|foreach item=fv from=$fileArray|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+    <td>{|$fv.filename|}</td>
+    <td align="center">{|$fv.filesize|} KB</td>
+    <td align="center">{|$fv.filemtime|}</td>
+    <td align="center">
+	{|if $fv.filetype=='sql'|}
+	<a href="?module={|$getval.module|}&act=restore&file={|$fv.filename|}">{|$lang.restore|}</a>
+	&nbsp;&nbsp;
+	<a href="?module={|$getval.module|}&act=viewdb&file={|$fv.filename|}" target="_blank">{|$lang.view|}</a>
+	{|else|}
+	<a href="?module={|$getval.module|}&act=restore&file={|$fv.filename|}">{|$lang.unzip|}</a>
+	{|/if|}
+	&nbsp;&nbsp;
+	<a href="?module={|$getval.module|}&act=download&file={|$fv.filename|}">{|$lang.download|}</a>
+	</td>
+    <td align="center"><a href="?module={|$getval.module|}&act=deletefile&file={|$fv.filename|}"  onclick="return confirmLink(this, 'delete the record?')">{|$lang.delete|}</a></td>
+  </tr>
+  {|/foreach|}
+
+  <tr> 
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+<br />
+
+<p>&nbsp;</p>
+</body>
+</html>

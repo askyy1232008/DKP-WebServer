@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<title>{|$lang.add|} & {|$lang.modify|}{|$lang.user|}</title>
+</head>
+
+<body>
+<table width="100%" border="0">
+  <tr class="contitle"> 
+    <td colspan="2">{|$lang.add|} & {|$lang.modify|}{|$lang.user|}</td>
+  </tr>
+  <form action="index.php?module=admin&act={|$act|}" name="form1" method="post">
+    <tr> 
+    <td>{|$lang.name|}
+		<input type="hidden" name="obj" id="obj" value="{|$obj|}">
+		<input type="hidden" name="id" id="id" value="{|$userdata.id|}">
+		<input type="hidden" name="jumpurl" id="jumpurl" value="{|$jumpurl|}">
+	</td>
+    <td><input type="text" name="name" id="name" value="{|$userdata.name|}"> </td>
+  </tr>
+    <tr> 
+    <td>{|$lang.password|}</td>
+    <td><input type="text" name="password" id="password" value=""> </td>
+  </tr>
+    <tr> 
+    <td>{|$lang.race|}</td>
+    <td>
+	<select name="raceid">
+		{|html_options options=$raceinfo selected=$userdata.raceid|}
+	</select>
+	</td>
+  </tr>
+    <tr> 
+    <td>{|$lang.work|}</td>
+    <td>
+	<select name="workid">
+		{|html_options options=$workinfo selected=$userdata.workid|}
+	</select>
+	</td>
+  </tr>
+    <tr> 
+    <td>{|$lang.level|}</td>
+    <td><input type="text" name="level" id="level" value="{|$userdata.level|}"> </td>
+  </tr>
+    <tr> 
+    <td>{|$lang.notes|}</td>
+    <td><input type="text" name="notes" id="notes" value="{|$userdata.notes|}" size="50"> </td>
+  </tr>
+    <tr> 
+    <td>{|$lang.group|}</td>
+    <td>
+	<select name="groupid">
+		{|html_options options=$groupinfo selected=$userdata.groupid|}
+	</select>
+	</td>
+  </tr>
+    <tr> 
+    <td>{|$lang.stat|}</td>
+    <td>{|if $userdata.stat=='0'|}
+		<select name="stat">
+			<option value="1">{|$lang.start|}</option>
+			<option value="0" selected>{|$lang.stop|}</option>
+		</select>
+		{|else|}
+		<select name="stat">
+			<option value="1" selected>{|$lang.start|}</option>
+			<option value="0">{|$lang.stop|}</option>
+		</select>
+		{|/if|}
+	</td>
+  </tr>
+    
+  <tr> 
+    <td colspan="2"><input type="submit"></td>
+  </tr>
+  </form>
+</table>
+</body>
+</html>

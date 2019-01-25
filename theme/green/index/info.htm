@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>{|$lang.sitetitle|}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link href="./theme/{|$theme|}/css.css" rel="stylesheet" type="text/css">
+{|*{|if $goto != ''|}<meta http-equiv="Refresh" content="3;URL={|$goto|}" />{|/if|}*|}
+
+</head>
+
+
+<body align="center" >
+<div id="main" align="center">
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<table width="550" border="0" height="150" class="blockContent">
+  <tr>
+    <td style="BORDER: #DFDFDF 1PX SOLID"> 
+	<img border="0" src="./theme/system/images/logo_wow.gif">
+{|if $goto|default:'' != ''|}<a href="{|if $goto|default:'' == 'back'|}javascript:history.back(){|else|}{|$goto|}{|/if|}" target="_{|$target|}">{|$info|}</a>{|else|}{|$info|}{|/if|}</div>
+{|if $goto|default:''=='back'|}
+<script language="javascript" type="text/javascript">
+function gotoUrl() {
+    history.back();
+}
+window.setTimeout("gotoUrl();", 3000);
+</script>
+{|elseif $goto|default:''!=''|}
+<script language="javascript" type="text/javascript">
+function gotoUrl(target, url) {
+    {|if $target!='self'|}
+    target.location=url;
+    {|else|}
+    self.location=url;
+    {|/if|}
+}
+window.setTimeout("gotoUrl({|$target|}, '{|$goto|}')", 3000);
+</script>
+{|/if|}
+
+    </td>
+  </tr>
+</table>
+</div>
+</body>
+</html>
+
+

@@ -1,0 +1,27 @@
+{|include file="header.htm"|}
+<center>
+
+<script language="javascript" type="text/javascript">
+function ImageLoad(img) {
+img.style.zoom='1';
+if(img.width>600) img.width=600;
+}
+function ImageOpen(img) {
+window.open(img.src,'','menubar=no,scrollbars=yes,width='+(screen.width-8)+',height='+(screen.height-74)+',left=0,top=0');
+}
+</script>
+
+<table width="90%" border="0">
+  <tr class="sectiontitle">
+    <td ><div align="center">{|$userdata.title|}</div></td>
+  </tr>
+  <tr>
+    <td style="text-indent:1cm;">{|$userdata.content|}</td>
+  </tr>
+  <tr>
+    <td align="right" class="small">{|$lang.sitetitle|}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  </tr>
+</table>
+</center>
+{|include file="foot.htm"|}
+

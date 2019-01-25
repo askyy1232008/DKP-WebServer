@@ -1,0 +1,64 @@
+{|include file="header.htm"|}
+
+{|if $smarty.session.member.uid|}
+<table width="100%" border="0">
+<form method="get" action="index.php">	
+<tr class="sectiontitle">
+<td>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="index.php?module=index&act=viewmember&id={|$smarty.session.member.uid|}">{|$lang.all|}{|$lang.info|}</a> &nbsp;
+<a href="index.php?module=index&act=modifymeminfo">{|$lang.modify|}{|$lang.info|}</a>
+&nbsp;
+<a href="index.php?module=index&act=list&obj=actionlist">{|$lang.action|}{|$lang.signup|}</a>
+</td>
+</tr>
+</form>
+</table>
+{|/if|}
+
+
+<link rel="stylesheet" type="text/css" href="./script/stylesheet.css">
+<div id="dhtmltooltip"></div>
+<script src="./script/tooltips.js" language="javascript"></script>
+
+<table width="100%" border="0">
+	<tr class="sectiontitle">
+		<td colspan="20">{|$lang.history|}{|$lang.action|}{|$lang.list|}</td>
+	</tr>
+
+  <tr class="contenttitle">
+  	<td>{|$lang.num|}</td>
+  	<td>{|$lang.name|}</td>
+  	<td>{|$lang.configure|}</td>
+	<td>{|$lang.date|}</td>
+	<td>{|$lang.invitetime|}</td>
+	<td>{|$lang.starttime|}</td>
+	<td>{|$lang.circaendtime|}</td>
+	<td>{|$lang.freezelimit|}</td>
+	<td>{|$lang.action|}</td>
+  </tr>
+
+  {|foreach item=val from=$userdata|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+			<td>{|$val.id|}</td>
+			<td><a href='index.php?module=index&act=list&obj=showsignup&id={|$val.id|}' onMouseover="ddrivetip('{|$val.signupnotes|}')"; onMouseout="hideddrivetip()">{|$val.name|}</a></td>
+			<td><a href='#' onMouseover="ddrivetip('{|$val.cfgnotes|}')"; onMouseout="hideddrivetip()">{|$val.cfg|}</a></td>
+			<td>{|$val.date|}</td>
+			<td>{|$val.invitetime|}</td>
+			<td>{|$val.starttime|}</td>
+			<td>{|$val.circaendtime|}</td>
+			<td>{|$val.freezelimit|}</td>
+			<td>{|$lang.history|}</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="20">{|$pageText|}</td>
+  </tr>
+  <tr>
+    <td colspan="10">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="10"><a href="index.php?module=index&act=list&obj=actionlist">{|$lang.action|}{|$lang.list|}</a></td>
+  </tr>
+</table>
+{|include file="foot.htm"|}

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="./theme/{|$theme|}/admincss.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./script/wow.js"></script>
+<title>{|$lang.modify|}{|$lang.action|}</title>
+</head>
+<html>
+<body>
+
+		<FIELDSET style="padding: 10px 10px 10px 10px;">
+						<LEGEND style="margin-bottom: 4px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: bold;"><b>{|$lang.modify|}{|$lang.action|}</b></LEGEND>				
+		<table border="0" bgcolor="#DEDEDE">
+		<form action="index.php?module=admin&act={|$act|}" name="form1" method="post">
+		  <tr> 
+			<td>{|$lang.configure|}
+			</td>
+			<td>
+				<select name="rid" class="input">
+				{|html_options options=$configure selected=$userdata.rid|}
+				</select>
+			</td>
+		  </tr>
+		  <tr> 
+			<td width="15%">
+				{|$lang.name|}
+				<input type="hidden" name="obj" value="raidlog" />
+				<input type="hidden" name="id" value="{|$userdata.id|}" />
+				<input type="hidden" name="jumpurl" value="{|$jumpurl|}" />
+			</td>
+			<td><input type="text" name="name" id="name" value="{|$userdata.name|}" size="40"></td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.invitetime|}</td>
+			<td><input type="text" name="invitetime" id="invitetime" value="{|$userdata.invitetime|}" size="30"> </td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.starttime|}</td>
+			<td><input type="text" name="starttime" id="starttime" value="{|$userdata.starttime|}" size="30"> </td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.circaendtime|}</td>
+			<td><input type="text" name="circaendtime" id="circaendtime" value="{|$userdata.circaendtime|}" size="30"> </td>
+		  </tr>
+		  <tr> 
+			<td colspan=2>{|$lang.freezelimit|}:
+				<select name="freezelimit" class="input">
+					<option label="1" value="1">1</option>
+					<option label="2" value="2">2</option>
+					<option label="3" value="3">3</option>
+					<option label="4" value="4">4</option>
+					<option label="5" value="5">5</option>
+					<option label="6" value="6">6</option>
+					<option label="7" value="7">7</option>
+					<option label="8" value="8">8</option>
+					<option label="9" value="9">9</option>
+				</select>
+			</td>
+		  </tr>
+		  <tr> 
+			<td>{|$lang.notes|}</td>
+			<td>
+				<textarea name="notes" rows="3" cols="30" class="input">{|$userdata.notes|}</textarea>
+			</td>
+		  </tr>
+		<tr>
+		<td></td>
+		<td class="navtext"><input type='submit' value="{|$lang.modify|}{|$lang.action|}"></td>
+		</tr>
+		</form>
+		</table>
+		</FIELDSET>
+
+</body>
+</html>

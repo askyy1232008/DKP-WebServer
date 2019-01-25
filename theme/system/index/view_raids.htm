@@ -1,0 +1,148 @@
+{|include file=header.htm|}
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" height="80">
+<tbody>
+	<tr><td width="387">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr>
+				<td width="88">
+					<div style="position: relative;">
+					<div style="position: absolute; top: -41px; left: 29px;">
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons-top.gif" border="0" height="41" width="34">
+					</div>
+					</div>
+					<img src="./theme/{|$theme|}/images/wow-base-dungeons.gif" border="0" height="51" width="88">
+				</td>
+				<td background="./theme/{|$theme|}/images/header-blank.gif" width="299">
+					<table border="0" cellpadding="0" cellspacing="0" width="299">
+					<tbody>
+						<tr>
+							<td colspan="2">
+								<table border="0" cellpadding="0" cellspacing="0" width="299">
+								<tbody>
+									<tr>
+										<td colspan="2"><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="1" width="299"></td>
+									</tr>
+									<tr>
+										<td><span class="navtext">{|$lang.event|}{|$lang.info|}</span>
+										
+										</td>
+										<td><img src="./theme/{|$theme|}/images/pixel_002.gif" border="0" height="24" width="1"></td>
+									</tr>
+								</tbody>
+								</table>
+							</td>
+						</tr>
+
+						<tr>
+							<td colspan="2">&nbsp;</td>
+						</tr>
+					</tbody>
+					</table>
+				</td>
+			</tr>
+			<tr><td colspan="2">&nbsp;</td></tr>		
+		</tbody>
+		
+		</table>
+		</td>
+		
+		<td align="right" valign="top" width="100%">	
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tbody>
+			<tr><td colspan="4"></td>&nbsp;</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>
+		</tbody>
+		</table>
+		</td>
+	</tr>
+</form>
+</tbody>
+</table>
+
+
+<body>
+<table width="90%" border="0">
+  <tr>
+    <td class="maintitle"><div align="center">{|$eventinfo.name|}</div></td>
+  </tr>
+  <tr>
+    <td><b>{|$lang.time|}:{|$eventinfo.raidtime|}</b></td>
+  </tr>
+  <tr>
+    <td><b>{|$lang.user|}:{|$eventinfo.joinnum|}</b></td>
+  </tr>
+  <tr>
+    <td>
+		<b>{|$lang.configure|}:</b> 
+		{|$cstr|}		
+	</td>
+  </tr>
+  <tr>
+    <td><b>{|$lang.notes|}:</b>
+	</td>
+  </tr>
+  <tr>
+    <td style="text-indent:1cm;">{|$eventinfo.notes|}</td>
+  </tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr class="contitle">
+	<td><b>{|$lang.item|}:</b></td>
+  </tr>
+  <tr>
+	<td>
+
+	<table width="100%">	<tr class="navtext"><th>{|$lang.item|}</th><th>{|$lang.dkp|}</th><th>{|$lang.earn|}</th><th>{|$lang.time|}</th></tr>
+		{|foreach from=$itemsArr item=iv key=key|}
+		<tr bgcolor="{|cycle values="#252525,#161616"|}" class="navtext">
+		<td>
+		<a class="tooltips" href="?module=index&act=items&iid={|$iv.id|}" onMouseOver="ajaxRead('id={|$iv.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$iv.itemid|}', '{|$iv.itemid|}', '{|$iv.name|}')"> <font color="#{|$iv.icolor|}">{|$iv.name|}</font> <span id="dkper_tooltips_{|$key|}{|$iv.itemid|}"></span></a>
+		</td>
+		<td><div align="center">{|$iv.value|}</div></td>
+		<td><a href="?module=index&act=standings&keyword={|$iv.urlusername|}">{|$iv.username|}</a></td>
+		<td><div align="center">{|$iv.intotime|}</div></td>
+		</tr>
+		{|/foreach|}
+	</table>
+
+	</td>
+  </tr>
+  <tr><td>&nbsp;</td></tr>
+  <tr class="contitle">
+    <td><b>{|$lang.userlist|}</b></td>
+  </tr>
+  <tr>
+    <td>
+
+		<table width="70%">
+		<tr class="title">
+			<td><a href="?module=index&act=viewraids&id={|$eventinfo.id|}&orderby=name">{|$lang.user|}</a></td>
+			<td><a href="?module=index&act=viewraids&id={|$eventinfo.id|}&orderby=class">{|$lang.work|}</a></td>
+			<td><a href="?module=index&act=viewraids&id={|$eventinfo.id|}&orderby=gname">{|$lang.group|}</a></td>
+			<td>{|$lang.dkp|}</td>
+		</tr>
+		{|foreach from=$userinfo item=uval|}		
+		<tr bgcolor="{|cycle values="#252525,#161616"|}" class="navtext">
+		<td><a href="?module=index&act=standings&keyword={|$uval.urlname|}">{|$uval.name|}</a></td>
+		<td><font color="#{|$uval.wcolor|}">{|$uval.class|}</font></td>
+		<td>{|$uval.gname|}</td>
+		<td>{|$uval.value|}</td>
+		</tr>
+		{|/foreach|}
+		</table>
+
+	</td>
+  </tr>
+  <tr>
+    <td align="right" class="small">{|$lang.sitetitle|}</td>
+  </tr>
+</table>
+{|$itemTips|}
+
+{|include file=foot.htm|} 

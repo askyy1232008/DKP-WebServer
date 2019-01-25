@@ -1,0 +1,65 @@
+{|include file="header.htm"|}
+
+<table width="100%" border="0">
+<form method="get" action="index.php">
+	<tr class="sectiontitle">
+		<td colspan="6">
+		{|$lang.copy|}
+		<select name="cid" class="input" onchange="javascript:form.submit();">	
+		{|html_options options=$copyarray selected=$getval.cid|}			
+		</select>
+		{|$lang.item|}{|$lang.dis|}{|$lang.list|}
+		<input type="hidden" name="module" value="index" />
+		<input type="hidden" name="act" value="itemdis" />
+		<input type="text" name="obj" id="keyword" value="{|$obj|}"  onkeyup="xajax_getInfo(document.getElementById('keyword').value,'item');" />
+		<input type="submit" value="{|$lang.user|}{|$lang.search|}" />
+		</td>
+	</tr>
+</form>
+
+  <tr class="contenttitle">
+  	<th>{|$lang.num|}</th>
+  	<th><a href="{|$baseurl|}&orderby=iid">{|$lang.item|}{|$lang.name|}</a></th>
+  	<th><a href="{|$baseurl|}&orderby=uid">{|$lang.user|}{|$lang.name|}</a></th>
+  	<th><a href="{|$baseurl|}&orderby=eid">{|$lang.event|}</a></th>
+  	<th><a href="{|$baseurl|}&orderby=value">{|$lang.item|}{|$lang.dkp|}{|$lang.value|}</a></th>
+	<th>{|$lang.dis|}{|$lang.time|}</th>
+  </tr>
+
+  {|foreach item=val key=key from=$userdata|}
+  <tr class="{|cycle values="rowa,rowb"|}">
+			<td align="center">{|$val.id|}</td>
+			<td>
+				<a class="tooltips" href="#tooltips" onMouseOver="ajaxRead('id={|$val.itemid|}&lng={|$lng|}&lo={|$lo|}', 'dkper_tooltips_{|$key|}{|$val.itemid|}', {|$val.itemid|}, '{|$val.iid|}')"> <font color="#{|$val.icolor|}">{|$val.iid|}</font> <span id="dkper_tooltips_{|$key|}{|$val.itemid|}"></span></a>
+			</td>
+			<td><a href="index.php?module=index&act=viewmember&id={|$val.uid|}">{|$val.uname|}</a></td>
+			<td><a href="index.php?module=index&act=viewraids&id={|$val.eid|}">{|$val.eventname|}</a></td>
+			<td align="center">{|$val.value|}</td>
+			<td align="center">{|$val.distime|}</td>
+  </tr>
+  {|/foreach|}
+
+  <tr>
+    <td colspan="6">{|$pageText|}</td>
+  </tr>
+</table>
+
+<script language="Javascript">
+var objInput = document.getElementById('keyword');
+var objouter = document.getElementById("citybox");
+function getIE(e){
+       var t=e.offsetTop;
+       var l=e.offsetLeft;
+       var w = e.offsetWidth;
+       var h = e.offsetHeight;
+       while(e=e.offsetParent){
+       t+=e.offsetTop;
+       l+=e.offsetLeft;
+       }
+       objouter.style.top = t+h;
+       objouter.style.left = l;
+}
+getIE(objInput);
+</script>
+
+{|include file="foot.htm"|}
